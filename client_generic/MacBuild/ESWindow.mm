@@ -1,6 +1,7 @@
 #import <IOKit/IOMapTypes.h>
 #import <IOKit/pwr_mgt/IOPMLib.h>
 #import "ESWindow.h"
+#import "ESAppDelegate.h"
 #import "ESScreensaver.h"
 #import "FirstTimeSetupManager.h"
 
@@ -31,7 +32,10 @@ static void ShowFirstTimeSetupCallback()
 {
     self.delegate = self;
 
-    [NSApplication sharedApplication].delegate = self;
+    // Create and set the app delegate
+    ESAppDelegate *appDelegate = [[ESAppDelegate alloc] init];
+    appDelegate.mainWindow = self;
+    [NSApplication sharedApplication].delegate = appDelegate;
 
     NSRect frame = [self contentRectForFrameRect:self.frame];
 
@@ -332,11 +336,6 @@ static void ShowFirstTimeSetupCallback()
         [mESView windowDidResize];
 }
 
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication*)__unused
-    theApplication
-{
-    return YES;
-}
 
 - (BOOL)canBecomeKeyWindow
 {

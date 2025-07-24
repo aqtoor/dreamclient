@@ -317,6 +317,10 @@
 		F07071D82C0E05DA008219A4 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F07071D32C0E052B008219A4 /* libboost_thread.a */; };
 		F07071D92C0E05DA008219A4 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F07071D22C0E052B008219A4 /* libboost_system.a */; };
 		F082D4412CBD5CA4001934FB /* Bugsnag in Frameworks */ = {isa = PBXBuildFile; productRef = F0351BE92CB5BB4F0055091F /* Bugsnag */; };
+		F0917E092E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
+		F0917E0A2E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
+		F0917E0B2E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
+		F0917E0C2E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
 		F09BCEBC2DF33CBB00EA1BD3 /* ScreenSaver copy-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F0C100852C1372F0007FA505 /* ScreenSaver copy-Info.plist */; };
 		F09BCEBD2DF33CCE00EA1BD3 /* ScreenSaver-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 218878D10EC6CD7E001ABD2E /* ScreenSaver-Info.plist */; };
 		F0B66ADF2E02DB8200751811 /* CodeStepViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADB2E02DB8200751811 /* CodeStepViewController.mm */; };
@@ -966,6 +970,8 @@
 		F07071D22C0E052B008219A4 /* libboost_system.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_system.a; path = "../../cache/univ-osx/lib/libboost_system.a"; sourceTree = "<group>"; };
 		F07071D32C0E052B008219A4 /* libboost_thread.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libboost_thread.a; path = "../../cache/univ-osx/lib/libboost_thread.a"; sourceTree = "<group>"; };
 		F08A7DC42CD507BC00D43977 /* NetworkConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkConfig.h; sourceTree = "<group>"; };
+		F0917E072E32764C000DBED8 /* ESAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESAppDelegate.h; sourceTree = "<group>"; };
+		F0917E082E32764C000DBED8 /* ESAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ESAppDelegate.mm; sourceTree = "<group>"; };
 		F0B66ADB2E02DB8200751811 /* CodeStepViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CodeStepViewController.mm; sourceTree = "<group>"; };
 		F0B66ADC2E02DB8200751811 /* EmailStepViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EmailStepViewController.mm; sourceTree = "<group>"; };
 		F0B66ADD2E02DB8200751811 /* StartupWindowController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = StartupWindowController.mm; sourceTree = "<group>"; };
@@ -1368,6 +1374,8 @@
 				1270D0EA2B28960500E1DCE3 /* PlatformUtils.h */,
 				1270D0EE2B28975400E1DCE3 /* PlatformUtils_Mac.mm */,
 				F02C15182E0194CA00BFFFF4 /* First startup */,
+				F0917E072E32764C000DBED8 /* ESAppDelegate.h */,
+				F0917E082E32764C000DBED8 /* ESAppDelegate.mm */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -2013,6 +2021,7 @@
 				2160FAD80F30F45100B2C27A /* Texture.cpp in Sources */,
 				F01CCF192C3D5E9D004E6DE9 /* CacheManager.cpp in Sources */,
 				46D2E8F22AFBA64B0054049D /* MBEFontAtlas.m in Sources */,
+				F0917E0A2E32764C000DBED8 /* ESAppDelegate.mm in Sources */,
 				46D2E9062AFBF8F70054049D /* MBEMathUtilities.m in Sources */,
 				2160FAD90F30F45100B2C27A /* TextureFlat.cpp in Sources */,
 				46D2E8F42AFBA64B0054049D /* MBETextMesh.m in Sources */,
@@ -2079,6 +2088,7 @@
 				46ED5CB12AF5326A00AF8F45 /* MetalShaders.metal in Sources */,
 				467230B72AC17A9E00017C51 /* ESMetalView.m in Sources */,
 				46D2E9052AFBF8F70054049D /* MBEMathUtilities.m in Sources */,
+				F0917E0B2E32764C000DBED8 /* ESAppDelegate.mm in Sources */,
 				2135DA530EC7479A005E246D /* ESScreensaverView.mm in Sources */,
 				2135DA550EC74853005E246D /* ESScreensaver.cpp in Sources */,
 				467B6FC92AE6D031001C80CB /* EDreamClient.cpp in Sources */,
@@ -2143,6 +2153,7 @@
 				F0C1003D2C1372EF007FA505 /* MetalShaders.metal in Sources */,
 				F0C1003E2C1372EF007FA505 /* ESMetalView.m in Sources */,
 				F0C1003F2C1372EF007FA505 /* MBEMathUtilities.m in Sources */,
+				F0917E0C2E32764C000DBED8 /* ESAppDelegate.mm in Sources */,
 				F0C100402C1372EF007FA505 /* ESScreensaverView.mm in Sources */,
 				F0C100412C1372EF007FA505 /* ESScreensaver.cpp in Sources */,
 				F0C100422C1372EF007FA505 /* EDreamClient.cpp in Sources */,
@@ -2206,6 +2217,7 @@
 				F0E9CE652C136B0500C4D694 /* Texture.cpp in Sources */,
 				F01CCF172C3D5E9D004E6DE9 /* CacheManager.cpp in Sources */,
 				F0E9CE662C136B0500C4D694 /* MBEFontAtlas.m in Sources */,
+				F0917E092E32764C000DBED8 /* ESAppDelegate.mm in Sources */,
 				F0E9CE672C136B0500C4D694 /* MBEMathUtilities.m in Sources */,
 				F0E9CE682C136B0500C4D694 /* TextureFlat.cpp in Sources */,
 				F0E9CE692C136B0500C4D694 /* MBETextMesh.m in Sources */,

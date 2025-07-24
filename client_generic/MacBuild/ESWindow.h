@@ -5,7 +5,7 @@
 @interface ESWindow : NSWindow
 #if defined(MAC_OS_X_VERSION_10_6) &&                                          \
     (MAC_OS_X_VERSION_MIN_REQUIRED >= MAC_OS_X_VERSION_10_6)
-                      <NSWindowDelegate, NSApplicationDelegate>
+                      <NSWindowDelegate>
 #endif
 {
 @public
@@ -39,8 +39,6 @@
 
 - (void)windowDidResize:(NSNotification*)notification;
 
-- (BOOL)applicationShouldTerminateAfterLastWindowClosed:
-    (NSApplication*)theApplication;
 
 - (BOOL)canBecomeKeyWindow;
 
