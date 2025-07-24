@@ -97,7 +97,6 @@
 - (void)awakeFromNib;
 - (void)loadSettings;
 - (void)saveSettings;
-- (NSTextField *)replaceTextFieldWithSafeVersion:(NSTextField *)textField;
 
 - (void)dealloc;
 - (void)showRestartMessageAndRelaunch;
