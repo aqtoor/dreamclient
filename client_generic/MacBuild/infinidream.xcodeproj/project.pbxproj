@@ -323,6 +323,8 @@
 		F0917E0C2E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
 		F09BCEBC2DF33CBB00EA1BD3 /* ScreenSaver copy-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F0C100852C1372F0007FA505 /* ScreenSaver copy-Info.plist */; };
 		F09BCEBD2DF33CCE00EA1BD3 /* ScreenSaver-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 218878D10EC6CD7E001ABD2E /* ScreenSaver-Info.plist */; };
+		F09CFF602E71D80100054936 /* ScreensaverInstaller.mm in Sources */ = {isa = PBXBuildFile; fileRef = F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */; };
+		F09CFF612E71D80100054936 /* ScreensaverInstaller.mm in Sources */ = {isa = PBXBuildFile; fileRef = F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */; };
 		F0B66ADF2E02DB8200751811 /* CodeStepViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADB2E02DB8200751811 /* CodeStepViewController.mm */; };
 		F0B66AE02E02DB8200751811 /* EmailStepViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADC2E02DB8200751811 /* EmailStepViewController.mm */; };
 		F0B66AE12E02DB8200751811 /* StartupWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADD2E02DB8200751811 /* StartupWindowController.mm */; };
@@ -972,6 +974,8 @@
 		F08A7DC42CD507BC00D43977 /* NetworkConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkConfig.h; sourceTree = "<group>"; };
 		F0917E072E32764C000DBED8 /* ESAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESAppDelegate.h; sourceTree = "<group>"; };
 		F0917E082E32764C000DBED8 /* ESAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ESAppDelegate.mm; sourceTree = "<group>"; };
+		F09CFF5E2E71D80100054936 /* ScreensaverInstaller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreensaverInstaller.h; sourceTree = "<group>"; };
+		F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ScreensaverInstaller.mm; sourceTree = "<group>"; };
 		F0B66ADB2E02DB8200751811 /* CodeStepViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CodeStepViewController.mm; sourceTree = "<group>"; };
 		F0B66ADC2E02DB8200751811 /* EmailStepViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EmailStepViewController.mm; sourceTree = "<group>"; };
 		F0B66ADD2E02DB8200751811 /* StartupWindowController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = StartupWindowController.mm; sourceTree = "<group>"; };
@@ -1337,6 +1341,8 @@
 		212B19650E8E5CD800CE185C /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				F09CFF5E2E71D80100054936 /* ScreensaverInstaller.h */,
+				F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */,
 				F0C16C102E01DE870039EC33 /* FirstTimeSetupManager.h */,
 				F0C16C112E01DE870039EC33 /* FirstTimeSetupManager.mm */,
 				21EE633410139BCC000CE53E /* main.m */,
@@ -1996,6 +2002,7 @@
 				2160FABA0F30F45100B2C27A /* ContentDecoder.cpp in Sources */,
 				121FCCB82B484B8B00F58DD5 /* Clip.cpp in Sources */,
 				2160FABC0F30F45100B2C27A /* Player.cpp in Sources */,
+				F09CFF612E71D80100054936 /* ScreensaverInstaller.mm in Sources */,
 				F0B66AEB2E02DB8200751811 /* CodeStepViewController.mm in Sources */,
 				F0B66AEC2E02DB8200751811 /* EmailStepViewController.mm in Sources */,
 				F0B66AED2E02DB8200751811 /* StartupWindowController.mm in Sources */,
@@ -2192,6 +2199,7 @@
 				F0E9CE502C136B0500C4D694 /* ContentDecoder.cpp in Sources */,
 				F0E9CE512C136B0500C4D694 /* Clip.cpp in Sources */,
 				F0E9CE522C136B0500C4D694 /* Player.cpp in Sources */,
+				F09CFF602E71D80100054936 /* ScreensaverInstaller.mm in Sources */,
 				F0B66ADF2E02DB8200751811 /* CodeStepViewController.mm in Sources */,
 				F0B66AE02E02DB8200751811 /* EmailStepViewController.mm in Sources */,
 				F0B66AE12E02DB8200751811 /* StartupWindowController.mm in Sources */,

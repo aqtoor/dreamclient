@@ -6,8 +6,10 @@
 //
 
 #import "ThanksStepViewController.h"
+#import "ESScreensaver.h"
 
 @interface ThanksStepViewController ()
+@property (weak) IBOutlet NSButton *installAndEnableScreensaver;
 
 @end
 
@@ -35,6 +37,10 @@
 }
 
 - (IBAction)closeModal:(id)sender {
+    // Save the screensaver installation preference
+    BOOL installScreensaver = (self.installAndEnableScreensaver.state == NSControlStateValueOn);
+    ESScreensaver_SetBoolSetting("settings.app.auto_install_screensaver", installScreensaver);
+    
     // End the sheet with OK response
     [self.view.window.sheetParent endSheet:self.view.window returnCode:NSModalResponseOK];
 }

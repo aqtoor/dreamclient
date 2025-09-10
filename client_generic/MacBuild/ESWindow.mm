@@ -4,8 +4,12 @@
 #import "ESAppDelegate.h"
 #import "ESScreensaver.h"
 #import "FirstTimeSetupManager.h"
+#ifndef SCREEN_SAVER
+#import "ScreensaverInstaller.h"
+#endif
 
 #include "client.h"
+#include "client_mac.h"
 
 @implementation ESWindow
 {
@@ -30,6 +34,7 @@ static void ShowFirstTimeSetupCallback()
 
 - (void)awakeFromNib // was - (NSWindow *)window
 {
+    if (g_Log) g_Log->Info("Awake from nib");
     self.delegate = self;
 
     // Create and set the app delegate
@@ -78,6 +83,17 @@ static void ShowFirstTimeSetupCallback()
     s_pWindow = self;
     ESSetShowPreferencesCallback(ShowPreferencesCallback);
     ESSetShowFirstTimeSetupCallback(ShowFirstTimeSetupCallback);
+    
+    // Check if user has enabled auto-install screensaver and install if needed
+    // Only run this in the app, not in the screensaver itself
+#ifndef SCREEN_SAVER
+    if (g_Log) g_Log->Info("Will check for install");
+    if (ESScreensaver_GetBoolSetting("settings.app.auto_install_screensaver", false)) {
+        if (g_Log) g_Log->Info("Auto install enabled");
+        [[ScreensaverInstaller sharedInstaller] installScreensaverIfNeeded];
+    }
+#endif
+    
     [self makeFirstResponder:self->mESView];
     [self initWindowProperties];
 }
