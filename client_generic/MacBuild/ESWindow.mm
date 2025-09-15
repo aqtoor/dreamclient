@@ -92,6 +92,12 @@ static void ShowFirstTimeSetupCallback()
         if (g_Log) g_Log->Info("Auto install enabled");
         [[ScreensaverInstaller sharedInstaller] installScreensaverIfNeeded];
     }
+    
+    // Enable screensaver if needed
+    if (ESScreensaver_GetBoolSetting("settings.app.keep_screensaver_enabled", false)) {
+        if (g_Log) g_Log->Info("Keep screensaver enabled preference is set");
+        [[ScreensaverInstaller sharedInstaller] enableScreensaverIfNeeded];
+    }
 #endif
     
     [self makeFirstResponder:self->mESView];

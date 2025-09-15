@@ -66,6 +66,11 @@
 
     IBOutlet NSTabView* tabView;
 
+    
+    __weak IBOutlet NSButton *installAndUpdateScreensaverButton;
+    
+    __weak IBOutlet NSButton *keepScreensaverEnabledButton;
+    
     NSString* m_origNickname;
     NSString* m_previousLoginEmail;
     
@@ -91,6 +96,8 @@
 - (IBAction)chooseContentFolder:(id)sender;
 - (IBAction)restartLogin:(id)sender;
 - (IBAction)validateLogin:(id)sender;
+- (IBAction)installAndUpdateScreensaver:(id)sender;
+- (IBAction)keepScreensaverEnabled:(id)sender;
 
 
 - (void)fixFlockSize;

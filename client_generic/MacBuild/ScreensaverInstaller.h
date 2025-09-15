@@ -32,6 +32,9 @@ NS_ASSUME_NONNULL_BEGIN
 /// Install/update the screensaver to user's Screen Savers directory
 - (BOOL)installScreensaver;
 
+/// Enable the screensaver in System Preferences if it's installed
+- (void)enableScreensaverIfNeeded;
+
 @end
 
 NS_ASSUME_NONNULL_END

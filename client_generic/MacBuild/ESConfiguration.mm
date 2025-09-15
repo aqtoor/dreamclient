@@ -1,6 +1,9 @@
 #import "ESConfiguration.h"
 #import "ESScreensaver.h"
 #import "clientversion.h"
+#ifndef SCREEN_SAVER
+#import "ScreensaverInstaller.h"
+#endif
 
 #include "EDreamClient.h"
 #include "ServerConfig.h"
@@ -29,6 +32,17 @@
     if (!cancelButton.isEnabled)
         return;
     [NSApp endSheet:self.window returnCode:m_loginWasSuccessful];
+}
+
+- (IBAction)installAndUpdateScreensaver:(id)sender {
+#ifndef SCREEN_SAVER
+    if (installAndUpdateScreensaverButton.state == NSControlStateValueOn) {
+        [[ScreensaverInstaller sharedInstaller] installScreensaverIfNeeded];
+    }
+#endif
+}
+
+- (IBAction)keepScreensaverEnabled:(id)sender {
 }
 
 // Helper to show a message box
@@ -339,6 +353,11 @@
 
     
     [self fixFlockSize];
+    
+    installAndUpdateScreensaverButton.state = 
+        ESScreensaver_GetBoolSetting("settings.app.auto_install_screensaver", false);
+    keepScreensaverEnabledButton.state = 
+        ESScreensaver_GetBoolSetting("settings.app.keep_screensaver_enabled", false);
 
     [self updateAuthUI];
 }
@@ -421,6 +440,9 @@
     ESScreensaver_SetBoolSetting("settings.app.log", debugLog.state);
 
     ESScreensaver_SetStringSetting("settings.content.server", serverField.stringValue.UTF8String);
+    
+    ESScreensaver_SetBoolSetting("settings.app.auto_install_screensaver", installAndUpdateScreensaverButton.state);
+    ESScreensaver_SetBoolSetting("settings.app.keep_screensaver_enabled", keepScreensaverEnabledButton.state);
 }
 
 // MARK: Create Account

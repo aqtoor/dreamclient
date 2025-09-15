@@ -317,6 +317,7 @@
 		F07071D82C0E05DA008219A4 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F07071D32C0E052B008219A4 /* libboost_thread.a */; };
 		F07071D92C0E05DA008219A4 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F07071D22C0E052B008219A4 /* libboost_system.a */; };
 		F082D4412CBD5CA4001934FB /* Bugsnag in Frameworks */ = {isa = PBXBuildFile; productRef = F0351BE92CB5BB4F0055091F /* Bugsnag */; };
+		F09159DA2E7846B900A66184 /* PaperSaver in Frameworks */ = {isa = PBXBuildFile; productRef = F09159D92E7846B900A66184 /* PaperSaver */; };
 		F0917E092E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
 		F0917E0A2E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
 		F0917E0B2E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
@@ -325,6 +326,7 @@
 		F09BCEBD2DF33CCE00EA1BD3 /* ScreenSaver-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 218878D10EC6CD7E001ABD2E /* ScreenSaver-Info.plist */; };
 		F09CFF602E71D80100054936 /* ScreensaverInstaller.mm in Sources */ = {isa = PBXBuildFile; fileRef = F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */; };
 		F09CFF612E71D80100054936 /* ScreensaverInstaller.mm in Sources */ = {isa = PBXBuildFile; fileRef = F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */; };
+		F09CFF642E747DAE00054936 /* PaperSaver in Frameworks */ = {isa = PBXBuildFile; productRef = F09CFF632E747DAE00054936 /* PaperSaver */; };
 		F0B66ADF2E02DB8200751811 /* CodeStepViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADB2E02DB8200751811 /* CodeStepViewController.mm */; };
 		F0B66AE02E02DB8200751811 /* EmailStepViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADC2E02DB8200751811 /* EmailStepViewController.mm */; };
 		F0B66AE12E02DB8200751811 /* StartupWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADD2E02DB8200751811 /* StartupWindowController.mm */; };
@@ -1001,6 +1003,7 @@
 				466C2AAA2AFA5B8600ED939F /* libpng_universal.a in Frameworks */,
 				467230BD2AC17EAA00017C51 /* Metal.framework in Frameworks */,
 				F0141B9E2C663E8900DBA60E /* libswscale.a in Frameworks */,
+				F09CFF642E747DAE00054936 /* PaperSaver in Frameworks */,
 				F07071D62C0E05DA008219A4 /* libboost_log_setup.a in Frameworks */,
 				467230BB2AC17E9A00017C51 /* MetalKit.framework in Frameworks */,
 				213D540311F79C9800CF500D /* IOKit.framework in Frameworks */,
@@ -1139,6 +1142,7 @@
 				F0E9CE7F2C136B0500C4D694 /* libpng_universal.a in Frameworks */,
 				F0E9CE802C136B0500C4D694 /* Metal.framework in Frameworks */,
 				F0141BAC2C663F1500DBA60E /* libswscale.a in Frameworks */,
+				F09159DA2E7846B900A66184 /* PaperSaver in Frameworks */,
 				F0E9CE812C136B0500C4D694 /* libboost_log_setup.a in Frameworks */,
 				F0E9CE822C136B0500C4D694 /* MetalKit.framework in Frameworks */,
 				F0E9CE832C136B0500C4D694 /* IOKit.framework in Frameworks */,
@@ -1347,8 +1351,8 @@
 				F0C16C112E01DE870039EC33 /* FirstTimeSetupManager.mm */,
 				21EE633410139BCC000CE53E /* main.m */,
 				212B195F0E8E5CCE00CE185C /* main.cpp */,
-				21AAA0EE0F70453200AC23A8 /* ESConfiguration.mm */,
 				21AAA0ED0F70453200AC23A8 /* ESConfiguration.h */,
+				21AAA0EE0F70453200AC23A8 /* ESConfiguration.mm */,
 				2135DA520EC7479A005E246D /* ESScreensaverView.mm */,
 				2135DA540EC74853005E246D /* ESScreensaver.cpp */,
 				12478A7E2B03B317006A8669 /* ESScreensaver.h */,
@@ -1632,6 +1636,7 @@
 			packageProductDependencies = (
 				129AC5CF2B69348E00E2E3E8 /* Sparkle */,
 				F0351BEB2CB5BBF10055091F /* Bugsnag */,
+				F09CFF632E747DAE00054936 /* PaperSaver */,
 			);
 			productName = ElectricSheep;
 			productReference = 2160FAAD0F30F43600B2C27A /* infinidream.app */;
@@ -1704,6 +1709,7 @@
 			packageProductDependencies = (
 				F0E9CE2B2C136B0500C4D694 /* Sparkle */,
 				F0351BED2CB5BBF90055091F /* Bugsnag */,
+				F09159D92E7846B900A66184 /* PaperSaver */,
 			);
 			productName = ElectricSheep;
 			productReference = F0E9CEB12C136B0500C4D694 /* infinidream stage.app */;
@@ -1719,6 +1725,12 @@
 				TargetAttributes = {
 					12726C1F2B6BF43C003C0FF6 = {
 						CreatedOnToolsVersion = 15.2;
+					};
+					2160FAAC0F30F43600B2C27A = {
+						LastSwiftMigration = 2600;
+					};
+					F0E9CE2A2C136B0500C4D694 = {
+						LastSwiftMigration = 2600;
 					};
 				};
 			};
@@ -1736,6 +1748,7 @@
 			packageReferences = (
 				129AC5CE2B69348E00E2E3E8 /* XCRemoteSwiftPackageReference "sparkle" */,
 				0397FD582B8C915A00C5D640 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */,
+				F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */,
 			);
 			projectDirPath = "";
 			projectRoot = "";
@@ -2473,6 +2486,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "infinidream App.entitlements";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
@@ -2513,6 +2527,8 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e i386 x86_64";
 			};
 			name = Debug;
@@ -2525,6 +2541,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "infinidream AppRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -2566,6 +2583,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e i386 x86_64";
 			};
 			name = Release;
@@ -2804,6 +2822,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "infinidream App.entitlements";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
@@ -2845,6 +2864,9 @@
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "infinidream-swift.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e i386 x86_64";
 			};
 			name = Debug;
@@ -2857,6 +2879,7 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "infinidream AppRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -2899,6 +2922,8 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "infinidream-swift.h";
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e i386 x86_64";
 			};
 			name = Release;
@@ -2979,6 +3004,14 @@
 				minimumVersion = 2.5.2;
 			};
 		};
+		F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AerialScreensaver/PaperSaver.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		F0E9CE2C2C136B0500C4D694 /* XCRemoteSwiftPackageReference "sparkle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparkle-project/sparkle";
@@ -3024,6 +3057,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0397FD582B8C915A00C5D640 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */;
 			productName = Bugsnag;
+		};
+		F09159D92E7846B900A66184 /* PaperSaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */;
+			productName = PaperSaver;
+		};
+		F09CFF632E747DAE00054936 /* PaperSaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */;
+			productName = PaperSaver;
 		};
 		F0E9CE2B2C136B0500C4D694 /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;

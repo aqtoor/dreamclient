@@ -155,4 +155,39 @@
     return YES;
 }
 
+- (void)enableScreensaverIfNeeded {
+    // Check if screensaver is installed first
+    /*if (![self isScreensaverInstalled]) {
+        if (g_Log) g_Log->Info("ScreensaverInstaller: Cannot enable - screensaver not installed");
+        return;
+    }
+    
+    if (g_Log) g_Log->Info("ScreensaverInstaller: Checking if screensaver needs to be enabled");
+    
+    // Check if infinidream is already the active screensaver
+    ScreensaverHelper *helper = [ScreensaverHelper shared];
+    if (![helper isInfinidreamActive]) {
+        if (g_Log) g_Log->Info("ScreensaverInstaller: infinidream is not active, setting it now");
+        
+        // Get current active screensaver name for logging
+        NSString *currentScreensaver = [helper getActiveScreensaverName];
+        if (currentScreensaver) {
+            if (g_Log) g_Log->Info("ScreensaverInstaller: Current active screensaver is: %s", 
+                                   [currentScreensaver UTF8String]);
+        }
+        
+        // Set infinidream as the active screensaver
+        [helper setInfinidreamAsActiveWithCompletion:^(BOOL success, NSError *error) {
+            if (success) {
+                if (g_Log) g_Log->Info("ScreensaverInstaller: Successfully set infinidream as active screensaver");
+            } else {
+                if (g_Log) g_Log->Error("ScreensaverInstaller: Failed to set infinidream as active: %s", 
+                                        error ? [[error localizedDescription] UTF8String] : "Unknown error");
+            }
+        }];
+    } else {
+        if (g_Log) g_Log->Info("ScreensaverInstaller: infinidream is already the active screensaver");
+    }*/
+}
+
 @end
