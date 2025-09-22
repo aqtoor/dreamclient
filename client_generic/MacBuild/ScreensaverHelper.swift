@@ -19,11 +19,8 @@ import PaperSaver
     
     /// Check if infinidream is the currently active screensaver
     @objc public func isInfinidreamActive() -> Bool {
-        guard let activeScreensaver = paperSaver.getActiveScreensaver() else {
-            return false
-        }
-        // Check if the identifier matches infinidream
-        return activeScreensaver.identifier == "infinidream"
+        let activeScreensavers = paperSaver.getActiveScreensavers()
+        return activeScreensavers.count == 1 && activeScreensavers[0] == "infinidream"
     }
     
     /// Set infinidream as the active screensaver
