@@ -32,6 +32,7 @@ enum class Endpoint {
     GETDREAM,
     GETDISLIKES,
     TELEMETRY,
+    QUOTA,
     // work-os compatible endpoints on /v2
     LOGIN_MAGIC,
     LOGIN_AUTHENTICATE,

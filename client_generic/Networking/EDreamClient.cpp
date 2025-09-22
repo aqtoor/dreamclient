@@ -101,6 +101,7 @@ static void SetNewAndDeleteOldString(
 
 std::unique_ptr<boost::asio::io_context> EDreamClient::io_context = std::make_unique<boost::asio::io_context>();
 std::unique_ptr<boost::asio::steady_timer> EDreamClient::ping_timer = std::make_unique<boost::asio::steady_timer>(*io_context);
+std::unique_ptr<boost::asio::steady_timer> EDreamClient::quota_timer = std::make_unique<boost::asio::steady_timer>(*io_context);
 
 // MARK: Ping via websocket
 void EDreamClient::SendPing()
@@ -116,6 +117,102 @@ void EDreamClient::ScheduleNextPing()
     ping_timer->async_wait([](const boost::system::error_code& ec) {
         if (!ec) {
             SendPing();
+        }
+    });
+}
+
+// MARK: Quota update timer
+void EDreamClient::UpdateQuota()
+{
+    // Grab the CacheManager
+    Cache::CacheManager& cm = Cache::CacheManager::getInstance();
+
+    Network::spCFileDownloader spDownload;
+
+    int maxAttempts = 3;
+    int currentAttempt = 0;
+    while (currentAttempt++ < maxAttempts)
+    {
+        spDownload = std::make_shared<Network::CFileDownloader>("UpdateQuota");
+        Network::NetworkHeaders::addStandardHeaders(spDownload);
+        spDownload->AppendHeader("Content-Type: application/json");
+
+        // Retrieve the sealed session from settings
+        std::string sealedSession = g_Settings()->Get("settings.content.sealed_session", std::string(""));
+
+        if (sealedSession.empty()) {
+            g_Log->Error("UpdateQuota: Sealed session not found in settings");
+            ScheduleNextQuotaUpdate();
+            return;
+        }
+
+        // Set the cookie with the sealed session
+        std::string cookieHeader = "Cookie: wos-session=" + sealedSession;
+        spDownload->AppendHeader(cookieHeader);
+
+        std::string url{ ServerConfig::ServerConfigManager::getInstance().getEndpoint(ServerConfig::Endpoint::QUOTA) };
+
+        if (spDownload->Perform(url))
+        {
+            break;
+        }
+        else
+        {
+            if (spDownload->ResponseCode() == 400 ||
+                spDownload->ResponseCode() == 401)
+            {
+                if (currentAttempt == maxAttempts) {
+                    g_Log->Error("UpdateQuota: Failed after %d attempts", maxAttempts);
+                    ScheduleNextQuotaUpdate();
+                    return;
+                }
+                if (!RefreshSealedSession()) {
+                    g_Log->Error("UpdateQuota: Failed to refresh session");
+                    ScheduleNextQuotaUpdate();
+                    return;
+                }
+            }
+            else
+            {
+                g_Log->Error("UpdateQuota: Failed to get quota. Server returned %i: %s",
+                             spDownload->ResponseCode(),
+                             spDownload->Data().c_str());
+            }
+        }
+    }
+
+    // Parse the quota response
+    try
+    {
+        json::value response = json::parse(spDownload->Data());
+        json::value data = response.at("data");
+        json::value quota = data.at("quota");
+
+        remainingQuota = quota.as_int64();
+
+        // Update CacheManager with the new quota
+        cm.setRemainingQuota(remainingQuota);
+
+        g_Log->Info("UpdateQuota: Successfully updated quota to %lld", remainingQuota);
+    }
+    catch (const boost::system::system_error& e)
+    {
+        g_Log->Error("UpdateQuota: Failed to parse quota response");
+        JSONUtil::LogException(e, spDownload->Data());
+    }
+
+    // Schedule the next update
+    ScheduleNextQuotaUpdate();
+}
+
+void EDreamClient::ScheduleNextQuotaUpdate()
+{
+    g_Log->Info("Scheduling next quota update in one hour");
+    // Schedule quota update every hour (3600 seconds)
+    quota_timer->expires_after(std::chrono::seconds(3600));
+    quota_timer->async_wait([](const boost::system::error_code& ec) {
+        if (!ec) {
+            UpdateQuota();
         }
     });
 }
@@ -206,8 +303,9 @@ void EDreamClient::DeinitializeClient()
     if (g_Client()->IsMultipleInstancesMode()) {
         return;
     }
-    // Stop the timer and io_context
+    // Stop the timers and io_context
     ping_timer->cancel();
+    quota_timer->cancel();
     io_context->stop();
 
     // Send goodbye message
@@ -305,13 +403,16 @@ void EDreamClient::DidSignIn()
     // This helps avoid issues with the socket.io client's internal state
     boost::thread delayedWebSocketThread([]() {
         boost::this_thread::sleep(boost::posix_time::milliseconds(500));
-        
+
         // Restart the io_context if it was stopped during SignOut/DeinitializeClient
         if (io_context->stopped()) {
             g_Log->Info("Restarting io_context after sign-in");
             io_context->restart();
         }
-        
+
+        // Start the quota update timer
+        ScheduleNextQuotaUpdate();
+
         // Reinitialize socket client to fix first-login connection issue
         // The socket.io client can get into an inconsistent state when listeners
         // are set during InitializeClient() but no connection is attempted
@@ -320,10 +421,10 @@ void EDreamClient::DidSignIn()
         s_SIOClient.set_fail_listener(&OnWebSocketFail);
         s_SIOClient.set_reconnecting_listener(&OnWebSocketReconnecting);
         s_SIOClient.set_reconnect_listener(&OnWebSocketReconnect);
-        
+
         // Clear any existing socket state before reconnecting
         s_SIOClient.clear_con_listeners();
-        
+
         EDreamClient::ConnectRemoteControlSocket();
     });
 }
@@ -757,7 +858,10 @@ std::string EDreamClient::Hello() {
         
         // Update CacheManager with that info
         cm.setRemainingQuota(remainingQuota);
-        
+
+        // Schedule the next quota update (this ensures quota timer is started even if DidSignIn was called earlier)
+        ScheduleNextQuotaUpdate();
+
         // Get the count of evicted UUIDs from CacheManager
         size_t localEvictedCount = Cache::CacheManager::getInstance().getEvictedUUIDsCount();
 

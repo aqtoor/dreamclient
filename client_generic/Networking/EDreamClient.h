@@ -92,7 +92,10 @@ private:
   private:
     static std::unique_ptr<boost::asio::io_context> io_context;
     static std::unique_ptr<boost::asio::steady_timer> ping_timer;
+    static std::unique_ptr<boost::asio::steady_timer> quota_timer;
     static void ScheduleNextPing();
+    static void ScheduleNextQuotaUpdate();
+    static void UpdateQuota();
     static void SendGoodbye();
 
 };
