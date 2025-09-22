@@ -115,7 +115,39 @@ fi
 
 echo -e "${GREEN}✓ ${SCREENSAVER_NAME} built successfully${NC}"
 
-# Step 2: Build app
+# Step 2: Notarize screensaver (if requested)
+if [ "$NOTARIZE" = true ]; then
+    echo -e "${YELLOW}Notarizing screensaver...${NC}"
+    
+    # Create a zip for screensaver notarization
+    echo -e "${YELLOW}Creating zip of screensaver for notarization...${NC}"
+    ditto -c -k --keepParent "${PRODUCTS_DIR}/${SCREENSAVER_NAME}" "${PRODUCTS_DIR}/screensaver.zip"
+    
+    # Submit screensaver for notarization
+    echo -e "${YELLOW}Submitting screensaver to Apple for notarization...${NC}"
+    if ! xcrun notarytool submit "${PRODUCTS_DIR}/screensaver.zip" \
+                     --keychain-profile "infinidream-notarization" \
+                     --wait; then
+        echo -e "${RED}✗ Screensaver notarization failed${NC}"
+        rm "${PRODUCTS_DIR}/screensaver.zip"
+        exit 1
+    fi
+    
+    # Staple the notarization ticket to screensaver
+    echo -e "${YELLOW}Stapling notarization ticket to screensaver...${NC}"
+    if ! xcrun stapler staple "${PRODUCTS_DIR}/${SCREENSAVER_NAME}"; then
+        echo -e "${RED}✗ Failed to staple notarization ticket to screensaver${NC}"
+        rm "${PRODUCTS_DIR}/screensaver.zip"
+        exit 1
+    fi
+    
+    # Clean up screensaver zip
+    rm "${PRODUCTS_DIR}/screensaver.zip"
+    
+    echo -e "${GREEN}✓ Screensaver notarization complete${NC}"
+fi
+
+# Step 3: Build app
 echo -e "${YELLOW}Building app (${APP_SCHEME})...${NC}"
 
 if [ "$BUILD_DEBUG" = true ]; then
@@ -143,7 +175,7 @@ fi
 
 echo -e "${GREEN}✓ ${APP_NAME} built successfully${NC}"
 
-# Step 3: Embed screensaver into app bundle
+# Step 4: Embed screensaver into app bundle
 echo -e "${YELLOW}Embedding screensaver into app bundle...${NC}"
 SAVER_PATH="${PRODUCTS_DIR}/${SCREENSAVER_NAME}"
 APP_RESOURCES="${PRODUCTS_DIR}/${APP_NAME}/Contents/Resources"
@@ -166,46 +198,40 @@ else
     exit 1
 fi
 
-# Step 4: Notarization (if requested)
+# Step 5: Notarize app (if requested)
 if [ "$NOTARIZE" = true ]; then
-    echo -e "${YELLOW}Starting notarization process...${NC}"
+    echo -e "${YELLOW}Notarizing app...${NC}"
     
-    # Check if we have a Developer ID
-    if [ -z "$DEVELOPER_ID" ]; then
-        echo -e "${YELLOW}DEVELOPER_ID environment variable not set${NC}"
-        echo "Please set DEVELOPER_ID to your 'Developer ID Application' certificate name"
-        echo "Example: export DEVELOPER_ID='Developer ID Application: Your Name (TEAMID)'"
+    # Note: Notarization requires keychain profile 'infinidream-notarization'
+    # Set up with: xcrun notarytool store-credentials 'infinidream-notarization' \
+    #              --apple-id YOUR_APPLE_ID --team-id BNXH8TLP5D
+    
+    # Create a zip for app notarization
+    echo -e "${YELLOW}Creating zip of app for notarization...${NC}"
+    ditto -c -k --keepParent "${PRODUCTS_DIR}/${APP_NAME}" "${PRODUCTS_DIR}/app.zip"
+    
+    # Submit app for notarization
+    echo -e "${YELLOW}Submitting app to Apple for notarization...${NC}"
+    if ! xcrun notarytool submit "${PRODUCTS_DIR}/app.zip" \
+                     --keychain-profile "infinidream-notarization" \
+                     --wait; then
+        echo -e "${RED}✗ App notarization failed${NC}"
+        rm "${PRODUCTS_DIR}/app.zip"
         exit 1
     fi
     
-    # Re-sign the app with Developer ID for notarization
-    echo -e "${YELLOW}Signing app with Developer ID...${NC}"
-    codesign --deep --force --verify --verbose \
-             --sign "$DEVELOPER_ID" \
-             --options runtime \
-             --entitlements ../Client/infinidream.entitlements \
-             "${PRODUCTS_DIR}/${APP_NAME}"
+    # Staple the notarization ticket to app
+    echo -e "${YELLOW}Stapling notarization ticket to app...${NC}"
+    if ! xcrun stapler staple "${PRODUCTS_DIR}/${APP_NAME}"; then
+        echo -e "${RED}✗ Failed to staple notarization ticket to app${NC}"
+        rm "${PRODUCTS_DIR}/app.zip"
+        exit 1
+    fi
     
-    # Create a zip for notarization
-    echo -e "${YELLOW}Creating zip for notarization...${NC}"
-    ditto -c -k --keepParent "${PRODUCTS_DIR}/${APP_NAME}" "${PRODUCTS_DIR}/infinidream.zip"
+    # Clean up app zip
+    rm "${PRODUCTS_DIR}/app.zip"
     
-    # Submit for notarization
-    echo -e "${YELLOW}Submitting to Apple for notarization...${NC}"
-    xcrun notarytool submit "${PRODUCTS_DIR}/infinidream.zip" \
-                     --apple-id "$APPLE_ID" \
-                     --password "$NOTARIZATION_PASSWORD" \
-                     --team-id "$TEAM_ID" \
-                     --wait
-    
-    # Staple the notarization ticket
-    echo -e "${YELLOW}Stapling notarization ticket...${NC}"
-    xcrun stapler staple "${PRODUCTS_DIR}/${APP_NAME}"
-    
-    # Clean up zip
-    rm "${PRODUCTS_DIR}/infinidream.zip"
-    
-    echo -e "${GREEN}✓ Notarization complete${NC}"
+    echo -e "${GREEN}✓ App notarization complete${NC}"
 fi
 
 # Summary
