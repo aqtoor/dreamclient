@@ -59,7 +59,7 @@
 		212313270F503C4500702B2C /* ContentDownloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212313190F503C4500702B2C /* ContentDownloader.cpp */; };
 		2123132E0F503C4500702B2C /* ContentDownloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212313190F503C4500702B2C /* ContentDownloader.cpp */; };
 		212CAF841141CA3F009DA85A /* TrebuchetMS-20.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212CAF831141CA3F009DA85A /* TrebuchetMS-20.glf */; };
-		212CAF851141CA3F009DA85A /* TrebuchetMS-20.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212CAF831141CA3F009DA85A /* TrebuchetMS-20.glf */; };
+		212CAF851141CA3F009DA85A /* TrebuchetMS-20.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212CAF831141CA3F009DA85A /* TrebuchetMS-20.glf */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2135D2690EC70571005E246D /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2135D2670EC70571005E246D /* AppKit.framework */; };
 		2135DA530EC7479A005E246D /* ESScreensaverView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2135DA520EC7479A005E246D /* ESScreensaverView.mm */; };
 		2135DA550EC74853005E246D /* ESScreensaver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2135DA540EC74853005E246D /* ESScreensaver.cpp */; };
@@ -98,11 +98,11 @@
 		2160FE7C0F30F8A000B2C27A /* vote-down.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE190F30F82800B2C27A /* vote-down.png */; };
 		2160FE7D0F30F8A000B2C27A /* vote-up.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE1A0F30F82800B2C27A /* vote-up.png */; };
 		2160FE800F30F8A000B2C27A /* logo.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE240F30F82800B2C27A /* logo.png */; };
-		2160FEE90F30F9FB00B2C27A /* vote-down.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE190F30F82800B2C27A /* vote-down.png */; };
-		2160FEEA0F30F9FB00B2C27A /* vote-up.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE1A0F30F82800B2C27A /* vote-up.png */; };
-		2160FEED0F30F9FB00B2C27A /* logo.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE240F30F82800B2C27A /* logo.png */; };
+		2160FEE90F30F9FB00B2C27A /* vote-down.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE190F30F82800B2C27A /* vote-down.png */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2160FEEA0F30F9FB00B2C27A /* vote-up.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE1A0F30F82800B2C27A /* vote-up.png */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2160FEED0F30F9FB00B2C27A /* logo.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE240F30F82800B2C27A /* logo.png */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2161F1940ECF8CEF00FE48E9 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 212B1AD90E8E6E0100CE185C /* libz.1.2.5.dylib */; };
-		2187F3860F463AA20004F8F9 /* TrebuchetMS-24.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2187F3850F463A740004F8F9 /* TrebuchetMS-24.glf */; };
+		2187F3860F463AA20004F8F9 /* TrebuchetMS-24.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2187F3850F463A740004F8F9 /* TrebuchetMS-24.glf */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2187F3870F463AB50004F8F9 /* TrebuchetMS-24.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2187F3850F463A740004F8F9 /* TrebuchetMS-24.glf */; };
 		218878D50EC6CDE2001ABD2E /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212B192A0E8E591000CE185C /* Common.cpp */; };
 		218878D60EC6CDE2001ABD2E /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212B192B0E8E591000CE185C /* Exception.cpp */; };
@@ -589,7 +589,7 @@
 /* Begin PBXBuildRule section */
 		2135DA930EC74C6B005E246D /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.gcc.4_0;
+			compilerSpec = com.apple.compilers.llvm.clang.1_0;
 			fileType = sourcecode.cpp;
 			inputFiles = (
 			);
@@ -600,7 +600,7 @@
 		};
 		F0C100802C1372EF007FA505 /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.gcc.4_0;
+			compilerSpec = com.apple.compilers.llvm.clang.1_0;
 			fileType = sourcecode.cpp;
 			inputFiles = (
 			);
@@ -2574,7 +2574,7 @@
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = BNXH8TLP5D;
+				DEVELOPMENT_TEAM = 3L54M5L5KK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
@@ -2686,13 +2686,14 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = NO;
-				DEVELOPMENT_TEAM = BNXH8TLP5D;
+				DEVELOPMENT_TEAM = 3L54M5L5KK;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -2803,7 +2804,7 @@
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = NO;
-				DEVELOPMENT_TEAM = BNXH8TLP5D;
+				DEVELOPMENT_TEAM = 3L54M5L5KK;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
