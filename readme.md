@@ -18,7 +18,7 @@ this repository uses git LFS, be sure to run
     brew install git-lfs
     git lfs install
 
-on Mac, open client_generic/MacBuild/e-dream.xcodeproj
+on Mac, open client_generic/MacBuild/infinidream.xcodeproj
 
 Use the "File>Packages>Update to Latest" menu to load the
 dependencies.
@@ -30,7 +30,42 @@ screensaver. The staging targets have their own directory
 /Users/Shared/infinidream.ai-stage that can coexist with the normal one
 /Users/Shared/infinidream.ai
 
-# to release
+## Build on macOS
+
+### Prerequisites
+- Xcode 14.0 or later
+- macOS 12.4 or later
+
+### Build Script
+```bash
+cd client_generic/MacBuild
+./build.sh [options]
+```
+
+### Options
+- `-s` : Build stage version (default: production)
+- `-d` : Build in Debug mode (default: Release)
+- `-n` : Enable notarization (requires Developer ID)
+
+### Examples
+```bash
+# Production release build
+./build.sh
+
+# Stage debug build
+./build.sh -s -d
+
+# Production release with notarization
+./build.sh -n
+```
+
+### Output
+- Screensaver: `build/DerivedData/Build/Products/{Debug|Release}/infinidream.saver`
+- Application: `build/DerivedData/Build/Products/{Debug|Release}/infinidream.app`
+
+The app bundle contains the embedded screensaver at `infinidream.app/Contents/Resources/infinidream.saver`.
+
+## to release (manually)
 
 make a git tag with the version
 ```

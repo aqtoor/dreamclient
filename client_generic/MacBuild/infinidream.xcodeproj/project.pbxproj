@@ -59,7 +59,7 @@
 		212313270F503C4500702B2C /* ContentDownloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212313190F503C4500702B2C /* ContentDownloader.cpp */; };
 		2123132E0F503C4500702B2C /* ContentDownloader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212313190F503C4500702B2C /* ContentDownloader.cpp */; };
 		212CAF841141CA3F009DA85A /* TrebuchetMS-20.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212CAF831141CA3F009DA85A /* TrebuchetMS-20.glf */; };
-		212CAF851141CA3F009DA85A /* TrebuchetMS-20.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212CAF831141CA3F009DA85A /* TrebuchetMS-20.glf */; };
+		212CAF851141CA3F009DA85A /* TrebuchetMS-20.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 212CAF831141CA3F009DA85A /* TrebuchetMS-20.glf */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2135D2690EC70571005E246D /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2135D2670EC70571005E246D /* AppKit.framework */; };
 		2135DA530EC7479A005E246D /* ESScreensaverView.mm in Sources */ = {isa = PBXBuildFile; fileRef = 2135DA520EC7479A005E246D /* ESScreensaverView.mm */; };
 		2135DA550EC74853005E246D /* ESScreensaver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2135DA540EC74853005E246D /* ESScreensaver.cpp */; };
@@ -98,11 +98,11 @@
 		2160FE7C0F30F8A000B2C27A /* vote-down.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE190F30F82800B2C27A /* vote-down.png */; };
 		2160FE7D0F30F8A000B2C27A /* vote-up.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE1A0F30F82800B2C27A /* vote-up.png */; };
 		2160FE800F30F8A000B2C27A /* logo.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE240F30F82800B2C27A /* logo.png */; };
-		2160FEE90F30F9FB00B2C27A /* vote-down.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE190F30F82800B2C27A /* vote-down.png */; };
-		2160FEEA0F30F9FB00B2C27A /* vote-up.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE1A0F30F82800B2C27A /* vote-up.png */; };
-		2160FEED0F30F9FB00B2C27A /* logo.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE240F30F82800B2C27A /* logo.png */; };
+		2160FEE90F30F9FB00B2C27A /* vote-down.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE190F30F82800B2C27A /* vote-down.png */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2160FEEA0F30F9FB00B2C27A /* vote-up.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE1A0F30F82800B2C27A /* vote-up.png */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		2160FEED0F30F9FB00B2C27A /* logo.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE240F30F82800B2C27A /* logo.png */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2161F1940ECF8CEF00FE48E9 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 212B1AD90E8E6E0100CE185C /* libz.1.2.5.dylib */; };
-		2187F3860F463AA20004F8F9 /* TrebuchetMS-24.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2187F3850F463A740004F8F9 /* TrebuchetMS-24.glf */; };
+		2187F3860F463AA20004F8F9 /* TrebuchetMS-24.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2187F3850F463A740004F8F9 /* TrebuchetMS-24.glf */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		2187F3870F463AB50004F8F9 /* TrebuchetMS-24.glf in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2187F3850F463A740004F8F9 /* TrebuchetMS-24.glf */; };
 		218878D50EC6CDE2001ABD2E /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212B192A0E8E591000CE185C /* Common.cpp */; };
 		218878D60EC6CDE2001ABD2E /* Exception.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 212B192B0E8E591000CE185C /* Exception.cpp */; };
@@ -203,6 +203,8 @@
 		46ED5CB42AF5326A00AF8F45 /* DisplayMetal.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46ED5CB02AF5326A00AF8F45 /* DisplayMetal.cpp */; };
 		46FA9E1A2B03CB0500708000 /* ShaderMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 46FA9E192B03CB0500708000 /* ShaderMetal.mm */; };
 		46FA9E1B2B03CB0B00708000 /* ShaderMetal.mm in Sources */ = {isa = PBXBuildFile; fileRef = 46FA9E192B03CB0500708000 /* ShaderMetal.mm */; };
+		F00638D72E83121600A1B908 /* infinidream.saver in Resources */ = {isa = PBXBuildFile; fileRef = F00638D62E83121600A1B908 /* infinidream.saver */; };
+		F00638D82E83121600A1B908 /* infinidream.saver in Resources */ = {isa = PBXBuildFile; fileRef = F00638D62E83121600A1B908 /* infinidream.saver */; };
 		F0141B742C59115400DBA60E /* PathManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0141B732C59115400DBA60E /* PathManager.cpp */; };
 		F0141B752C59115500DBA60E /* PathManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0141B732C59115400DBA60E /* PathManager.cpp */; };
 		F0141B762C59115500DBA60E /* PathManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = F0141B732C59115400DBA60E /* PathManager.cpp */; };
@@ -317,12 +319,16 @@
 		F07071D82C0E05DA008219A4 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F07071D32C0E052B008219A4 /* libboost_thread.a */; };
 		F07071D92C0E05DA008219A4 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F07071D22C0E052B008219A4 /* libboost_system.a */; };
 		F082D4412CBD5CA4001934FB /* Bugsnag in Frameworks */ = {isa = PBXBuildFile; productRef = F0351BE92CB5BB4F0055091F /* Bugsnag */; };
+		F09159DA2E7846B900A66184 /* PaperSaver in Frameworks */ = {isa = PBXBuildFile; productRef = F09159D92E7846B900A66184 /* PaperSaver */; };
 		F0917E092E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
 		F0917E0A2E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
 		F0917E0B2E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
 		F0917E0C2E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
 		F09BCEBC2DF33CBB00EA1BD3 /* ScreenSaver copy-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F0C100852C1372F0007FA505 /* ScreenSaver copy-Info.plist */; };
 		F09BCEBD2DF33CCE00EA1BD3 /* ScreenSaver-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 218878D10EC6CD7E001ABD2E /* ScreenSaver-Info.plist */; };
+		F09CFF602E71D80100054936 /* ScreensaverInstaller.mm in Sources */ = {isa = PBXBuildFile; fileRef = F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */; };
+		F09CFF612E71D80100054936 /* ScreensaverInstaller.mm in Sources */ = {isa = PBXBuildFile; fileRef = F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */; };
+		F09CFF642E747DAE00054936 /* PaperSaver in Frameworks */ = {isa = PBXBuildFile; productRef = F09CFF632E747DAE00054936 /* PaperSaver */; };
 		F0B66ADF2E02DB8200751811 /* CodeStepViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADB2E02DB8200751811 /* CodeStepViewController.mm */; };
 		F0B66AE02E02DB8200751811 /* EmailStepViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADC2E02DB8200751811 /* EmailStepViewController.mm */; };
 		F0B66AE12E02DB8200751811 /* StartupWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADD2E02DB8200751811 /* StartupWindowController.mm */; };
@@ -574,6 +580,8 @@
 		F0E9CEAA2C136B0500C4D694 /* vote-up.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE1A0F30F82800B2C27A /* vote-up.png */; };
 		F0E9CEAB2C136B0500C4D694 /* logo.png in CopyFiles */ = {isa = PBXBuildFile; fileRef = 2160FE240F30F82800B2C27A /* logo.png */; };
 		F0E9CEAC2C136B0500C4D694 /* Credits.html in CopyFiles */ = {isa = PBXBuildFile; fileRef = 21006FBD1017BC2C004A6511 /* Credits.html */; };
+		F0F4CE4C2E785E6F00C1F6AA /* ScreensaverHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F4CE4B2E785E6F00C1F6AA /* ScreensaverHelper.swift */; };
+		F0F4CE4D2E785E6F00C1F6AA /* ScreensaverHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F0F4CE4B2E785E6F00C1F6AA /* ScreensaverHelper.swift */; };
 		F0F6D4262BCD504500222647 /* osd-like.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F6D4242BCD504500222647 /* osd-like.png */; };
 		F0F6D4272BCD504500222647 /* osd-like.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F6D4242BCD504500222647 /* osd-like.png */; };
 		F0F6D4282BCD504500222647 /* osd-dislike.png in Resources */ = {isa = PBXBuildFile; fileRef = F0F6D4252BCD504500222647 /* osd-dislike.png */; };
@@ -583,7 +591,7 @@
 /* Begin PBXBuildRule section */
 		2135DA930EC74C6B005E246D /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.gcc.4_0;
+			compilerSpec = com.apple.compilers.llvm.clang.1_0;
 			fileType = sourcecode.cpp;
 			inputFiles = (
 			);
@@ -594,7 +602,7 @@
 		};
 		F0C100802C1372EF007FA505 /* PBXBuildRule */ = {
 			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.gcc.4_0;
+			compilerSpec = com.apple.compilers.llvm.clang.1_0;
 			fileType = sourcecode.cpp;
 			inputFiles = (
 			);
@@ -912,6 +920,7 @@
 		46ED5CB02AF5326A00AF8F45 /* DisplayMetal.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = DisplayMetal.cpp; path = ../../DisplayOutput/Metal/DisplayMetal.cpp; sourceTree = "<group>"; };
 		46FA9E182B03CB0500708000 /* ShaderMetal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderMetal.h; sourceTree = "<group>"; };
 		46FA9E192B03CB0500708000 /* ShaderMetal.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ShaderMetal.mm; sourceTree = "<group>"; };
+		F00638D62E83121600A1B908 /* infinidream.saver */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = infinidream.saver; path = Resources/infinidream.saver; sourceTree = "<group>"; };
 		F0141B722C59115400DBA60E /* PathManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PathManager.h; sourceTree = "<group>"; };
 		F0141B732C59115400DBA60E /* PathManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PathManager.cpp; sourceTree = "<group>"; };
 		F0141B782C5925C900DBA60E /* ServerConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ServerConfig.h; sourceTree = "<group>"; };
@@ -972,6 +981,8 @@
 		F08A7DC42CD507BC00D43977 /* NetworkConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NetworkConfig.h; sourceTree = "<group>"; };
 		F0917E072E32764C000DBED8 /* ESAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ESAppDelegate.h; sourceTree = "<group>"; };
 		F0917E082E32764C000DBED8 /* ESAppDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ESAppDelegate.mm; sourceTree = "<group>"; };
+		F09CFF5E2E71D80100054936 /* ScreensaverInstaller.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ScreensaverInstaller.h; sourceTree = "<group>"; };
+		F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ScreensaverInstaller.mm; sourceTree = "<group>"; };
 		F0B66ADB2E02DB8200751811 /* CodeStepViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = CodeStepViewController.mm; sourceTree = "<group>"; };
 		F0B66ADC2E02DB8200751811 /* EmailStepViewController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = EmailStepViewController.mm; sourceTree = "<group>"; };
 		F0B66ADD2E02DB8200751811 /* StartupWindowController.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = StartupWindowController.mm; sourceTree = "<group>"; };
@@ -985,6 +996,8 @@
 		F0CCD2532B9A59320070314F /* infinidream AppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "infinidream AppRelease.entitlements"; sourceTree = "<group>"; };
 		F0E9CEB12C136B0500C4D694 /* infinidream stage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "infinidream stage.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0E9CEB22C136B0600C4D694 /* infinidream App copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "infinidream App copy-Info.plist"; sourceTree = "<group>"; };
+		F0F4CE4B2E785E6F00C1F6AA /* ScreensaverHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreensaverHelper.swift; sourceTree = "<group>"; };
+		F0F4CE4E2E785E7100C1F6AA /* infinidream App Prod-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "infinidream App Prod-Bridging-Header.h"; sourceTree = "<group>"; };
 		F0F6D4242BCD504500222647 /* osd-like.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osd-like.png"; sourceTree = "<group>"; };
 		F0F6D4252BCD504500222647 /* osd-dislike.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "osd-dislike.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -997,6 +1010,7 @@
 				466C2AAA2AFA5B8600ED939F /* libpng_universal.a in Frameworks */,
 				467230BD2AC17EAA00017C51 /* Metal.framework in Frameworks */,
 				F0141B9E2C663E8900DBA60E /* libswscale.a in Frameworks */,
+				F09CFF642E747DAE00054936 /* PaperSaver in Frameworks */,
 				F07071D62C0E05DA008219A4 /* libboost_log_setup.a in Frameworks */,
 				467230BB2AC17E9A00017C51 /* MetalKit.framework in Frameworks */,
 				213D540311F79C9800CF500D /* IOKit.framework in Frameworks */,
@@ -1135,6 +1149,7 @@
 				F0E9CE7F2C136B0500C4D694 /* libpng_universal.a in Frameworks */,
 				F0E9CE802C136B0500C4D694 /* Metal.framework in Frameworks */,
 				F0141BAC2C663F1500DBA60E /* libswscale.a in Frameworks */,
+				F09159DA2E7846B900A66184 /* PaperSaver in Frameworks */,
 				F0E9CE812C136B0500C4D694 /* libboost_log_setup.a in Frameworks */,
 				F0E9CE822C136B0500C4D694 /* MetalKit.framework in Frameworks */,
 				F0E9CE832C136B0500C4D694 /* IOKit.framework in Frameworks */,
@@ -1337,12 +1352,14 @@
 		212B19650E8E5CD800CE185C /* Client */ = {
 			isa = PBXGroup;
 			children = (
+				F09CFF5E2E71D80100054936 /* ScreensaverInstaller.h */,
+				F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */,
 				F0C16C102E01DE870039EC33 /* FirstTimeSetupManager.h */,
 				F0C16C112E01DE870039EC33 /* FirstTimeSetupManager.mm */,
 				21EE633410139BCC000CE53E /* main.m */,
 				212B195F0E8E5CCE00CE185C /* main.cpp */,
-				21AAA0EE0F70453200AC23A8 /* ESConfiguration.mm */,
 				21AAA0ED0F70453200AC23A8 /* ESConfiguration.h */,
+				21AAA0EE0F70453200AC23A8 /* ESConfiguration.mm */,
 				2135DA520EC7479A005E246D /* ESScreensaverView.mm */,
 				2135DA540EC74853005E246D /* ESScreensaver.cpp */,
 				12478A7E2B03B317006A8669 /* ESScreensaver.h */,
@@ -1376,6 +1393,8 @@
 				F02C15182E0194CA00BFFFF4 /* First startup */,
 				F0917E072E32764C000DBED8 /* ESAppDelegate.h */,
 				F0917E082E32764C000DBED8 /* ESAppDelegate.mm */,
+				F0F4CE4B2E785E6F00C1F6AA /* ScreensaverHelper.swift */,
+				F0F4CE4E2E785E7100C1F6AA /* infinidream App Prod-Bridging-Header.h */,
 			);
 			name = Client;
 			sourceTree = "<group>";
@@ -1493,6 +1512,7 @@
 				12726C132B694F36003C0FF6 /* infinidream App.entitlements */,
 				215545A812620D3000AB51BF /* dsa_pub.pem */,
 				21EE634D10139BEF000CE53E /* MainMenu.xib */,
+				F00638D62E83121600A1B908 /* infinidream.saver */,
 				F0633F482DF1EF500092BCDB /* infinidream-App-Info.plist */,
 				218878D10EC6CD7E001ABD2E /* ScreenSaver-Info.plist */,
 				F0E9CEB22C136B0600C4D694 /* infinidream App copy-Info.plist */,
@@ -1626,6 +1646,7 @@
 			packageProductDependencies = (
 				129AC5CF2B69348E00E2E3E8 /* Sparkle */,
 				F0351BEB2CB5BBF10055091F /* Bugsnag */,
+				F09CFF632E747DAE00054936 /* PaperSaver */,
 			);
 			productName = ElectricSheep;
 			productReference = 2160FAAD0F30F43600B2C27A /* infinidream.app */;
@@ -1698,6 +1719,7 @@
 			packageProductDependencies = (
 				F0E9CE2B2C136B0500C4D694 /* Sparkle */,
 				F0351BED2CB5BBF90055091F /* Bugsnag */,
+				F09159D92E7846B900A66184 /* PaperSaver */,
 			);
 			productName = ElectricSheep;
 			productReference = F0E9CEB12C136B0500C4D694 /* infinidream stage.app */;
@@ -1713,6 +1735,12 @@
 				TargetAttributes = {
 					12726C1F2B6BF43C003C0FF6 = {
 						CreatedOnToolsVersion = 15.2;
+					};
+					2160FAAC0F30F43600B2C27A = {
+						LastSwiftMigration = 2600;
+					};
+					F0E9CE2A2C136B0500C4D694 = {
+						LastSwiftMigration = 2600;
 					};
 				};
 			};
@@ -1730,6 +1758,7 @@
 			packageReferences = (
 				129AC5CE2B69348E00E2E3E8 /* XCRemoteSwiftPackageReference "sparkle" */,
 				0397FD582B8C915A00C5D640 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */,
+				F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */,
 			);
 			projectDirPath = "";
 			projectRoot = "";
@@ -1820,6 +1849,7 @@
 				21ADBB251305D380000A9F20 /* red.tif in Resources */,
 				1243576D2B31FC1B00CCD62A /* BuildData.json in Resources */,
 				F05994702BA0A07300B018C7 /* osd-play.png in Resources */,
+				F00638D72E83121600A1B908 /* infinidream.saver in Resources */,
 				F02C14EF2E01904600BFFFF4 /* StartupWindowController.xib in Resources */,
 				F0F6D4292BCD504500222647 /* osd-dislike.png in Resources */,
 				21ADBB261305D380000A9F20 /* yellow.tif in Resources */,
@@ -1902,6 +1932,7 @@
 				F0E9CE442C136B0500C4D694 /* red.tif in Resources */,
 				F0E9CE452C136B0500C4D694 /* BuildData.json in Resources */,
 				F0E9CE462C136B0500C4D694 /* osd-play.png in Resources */,
+				F00638D82E83121600A1B908 /* infinidream.saver in Resources */,
 				F02C14F22E01904600BFFFF4 /* StartupWindowController.xib in Resources */,
 				F0E9CE472C136B0500C4D694 /* osd-dislike.png in Resources */,
 				F0E9CE482C136B0500C4D694 /* yellow.tif in Resources */,
@@ -1987,6 +2018,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2197D56719B07FCF00EFA1F2 /* proximus.c in Sources */,
+				F0F4CE4D2E785E6F00C1F6AA /* ScreensaverHelper.swift in Sources */,
 				461C9D7D2B28BA50000C44E9 /* JSONStorage.cpp in Sources */,
 				F02A5C3D2C453FEF00B57FBD /* DreamDownloader.cpp in Sources */,
 				2160FAB30F30F45100B2C27A /* Common.cpp in Sources */,
@@ -1996,6 +2028,7 @@
 				2160FABA0F30F45100B2C27A /* ContentDecoder.cpp in Sources */,
 				121FCCB82B484B8B00F58DD5 /* Clip.cpp in Sources */,
 				2160FABC0F30F45100B2C27A /* Player.cpp in Sources */,
+				F09CFF612E71D80100054936 /* ScreensaverInstaller.mm in Sources */,
 				F0B66AEB2E02DB8200751811 /* CodeStepViewController.mm in Sources */,
 				F0B66AEC2E02DB8200751811 /* EmailStepViewController.mm in Sources */,
 				F0B66AED2E02DB8200751811 /* StartupWindowController.mm in Sources */,
@@ -2183,6 +2216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F0E9CE4A2C136B0500C4D694 /* proximus.c in Sources */,
+				F0F4CE4C2E785E6F00C1F6AA /* ScreensaverHelper.swift in Sources */,
 				F0E9CE4B2C136B0500C4D694 /* JSONStorage.cpp in Sources */,
 				F02A5C402C453FEF00B57FBD /* DreamDownloader.cpp in Sources */,
 				F0E9CE4C2C136B0500C4D694 /* Common.cpp in Sources */,
@@ -2192,6 +2226,7 @@
 				F0E9CE502C136B0500C4D694 /* ContentDecoder.cpp in Sources */,
 				F0E9CE512C136B0500C4D694 /* Clip.cpp in Sources */,
 				F0E9CE522C136B0500C4D694 /* Player.cpp in Sources */,
+				F09CFF602E71D80100054936 /* ScreensaverInstaller.mm in Sources */,
 				F0B66ADF2E02DB8200751811 /* CodeStepViewController.mm in Sources */,
 				F0B66AE02E02DB8200751811 /* EmailStepViewController.mm in Sources */,
 				F0B66AE12E02DB8200751811 /* StartupWindowController.mm in Sources */,
@@ -2463,8 +2498,10 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = infinidream;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				AUTOMATION_APPLE_EVENTS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "infinidream App.entitlements";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
@@ -2473,7 +2510,14 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_BUILTIN_FUNCTIONS = NO;
@@ -2503,8 +2547,17 @@
 				PRODUCT_NAME = infinidream;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "infinidream App Prod-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e i386 x86_64";
 			};
 			name = Debug;
@@ -2515,18 +2568,27 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = infinidream;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				AUTOMATION_APPLE_EVENTS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "infinidream AppRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = BNXH8TLP5D;
+				DEVELOPMENT_TEAM = 3L54M5L5KK;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_ENABLE_BUILTIN_FUNCTIONS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
@@ -2556,8 +2618,16 @@
 				PRODUCT_NAME = infinidream;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "infinidream App Prod-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e i386 x86_64";
 			};
 			name = Release;
@@ -2622,15 +2692,14 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = NO;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = 3L54M5L5KK;
+				DEVELOPMENT_TEAM = 3L54M5L5KK;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -2735,15 +2804,13 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = YES;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEPLOYMENT_POSTPROCESSING = NO;
-				DEVELOPMENT_TEAM = "";
-				"DEVELOPMENT_TEAM[sdk=macosx*]" = BNXH8TLP5D;
+				DEVELOPMENT_TEAM = 3L54M5L5KK;
 				ENABLE_NS_ASSERTIONS = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -2794,8 +2861,10 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = infinidream;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				AUTOMATION_APPLE_EVENTS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "infinidream App.entitlements";
 				CODE_SIGN_IDENTITY = "";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "";
@@ -2804,7 +2873,15 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				"DEVELOPMENT_TEAM[sdk=macosx*]" = "";
+				ENABLE_APP_SANDBOX = NO;
+				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_BUILTIN_FUNCTIONS = NO;
@@ -2835,8 +2912,16 @@
 				PRODUCT_NAME = "infinidream stage";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e i386 x86_64";
 			};
 			name = Debug;
@@ -2847,8 +2932,10 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = infinidream;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				AUTOMATION_APPLE_EVENTS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "infinidream AppRelease.entitlements";
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
@@ -2859,6 +2946,12 @@
 				DEVELOPMENT_TEAM = BNXH8TLP5D;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_RESOURCE_ACCESS_AUDIO_INPUT = NO;
+				ENABLE_RESOURCE_ACCESS_CALENDARS = NO;
+				ENABLE_RESOURCE_ACCESS_CAMERA = NO;
+				ENABLE_RESOURCE_ACCESS_CONTACTS = NO;
+				ENABLE_RESOURCE_ACCESS_LOCATION = NO;
+				ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY = NO;
 				GCC_C_LANGUAGE_STANDARD = "compiler-default";
 				GCC_ENABLE_BUILTIN_FUNCTIONS = NO;
 				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
@@ -2889,8 +2982,15 @@
 				PRODUCT_NAME = "infinidream stage";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
+				RUNTIME_EXCEPTION_ALLOW_JIT = NO;
+				RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY = NO;
+				RUNTIME_EXCEPTION_DEBUGGING_TOOL = NO;
+				RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION = NO;
+				RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION = NO;
 				SDKROOT = macosx;
 				STRIP_INSTALLED_PRODUCT = YES;
+				SWIFT_VERSION = 5.0;
 				VALID_ARCHS = "arm64 arm64e i386 x86_64";
 			};
 			name = Release;
@@ -2971,6 +3071,14 @@
 				minimumVersion = 2.5.2;
 			};
 		};
+		F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/AerialScreensaver/PaperSaver.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		F0E9CE2C2C136B0500C4D694 /* XCRemoteSwiftPackageReference "sparkle" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/sparkle-project/sparkle";
@@ -3016,6 +3124,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0397FD582B8C915A00C5D640 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */;
 			productName = Bugsnag;
+		};
+		F09159D92E7846B900A66184 /* PaperSaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */;
+			productName = PaperSaver;
+		};
+		F09CFF632E747DAE00054936 /* PaperSaver */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */;
+			productName = PaperSaver;
 		};
 		F0E9CE2B2C136B0500C4D694 /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;

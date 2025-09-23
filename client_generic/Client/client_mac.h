@@ -146,6 +146,9 @@ class CElectricSheep_Mac : public CElectricSheep
         // Make sure we are in read only mode in that case !
         InitStorage(m_MultipleInstancesMode);
 
+        // Initialize logging early so it's available throughout the app lifecycle
+        AttachLog();
+
         GetClientProxy();
     }
 
@@ -210,10 +213,7 @@ class CElectricSheep_Mac : public CElectricSheep
 
         printf("Startup()\n");
 
-        AttachLog();
-
-        // This is determined now in constructor, but we log it here
-        // as we now have logging up and running
+        // This was determined in constructor, and we've already initialized logging
         if (m_MultipleInstancesMode) {
             g_Log->Info("⛓️‍💥⛓️‍💥⛓️‍💥 Running in offline mode ⛓️‍💥⛓️‍💥⛓️‍💥");
         }
