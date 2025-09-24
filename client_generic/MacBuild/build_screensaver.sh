@@ -103,33 +103,59 @@ else
     echo "This may cause notarization to fail."
 fi
 
-# Copy screensaver to project Resources directory
-echo -e "${YELLOW}Copying screensaver to project Resources directory...${NC}"
-PROJECT_SCREENSAVER="Resources/${SCREENSAVER_NAME}"
+# Copy screensaver to output directory for backwards compatibility
+echo -e "${YELLOW}Copying screensaver to output directory...${NC}"
 OUTPUT_SAVER="${BUILD_DIR}/${BUILD_CONFIG}/${SCREENSAVER_NAME}"
-
-# Copy to both locations for backwards compatibility and project integration
 cp -R "${PRODUCTS_DIR}/${SCREENSAVER_NAME}" "${OUTPUT_SAVER}"
-cp -R "${PRODUCTS_DIR}/${SCREENSAVER_NAME}" "${PROJECT_SCREENSAVER}"
 
-if [ ! -d "${OUTPUT_SAVER}" ] || [ ! -d "${PROJECT_SCREENSAVER}" ]; then
-    echo -e "${RED}Failed to copy screensaver${NC}"
+if [ ! -d "${OUTPUT_SAVER}" ]; then
+    echo -e "${RED}Failed to copy screensaver to output directory${NC}"
     exit 1
 fi
 
-echo -e "${GREEN}✓ Screensaver copied to project Resources${NC}"
-
-# Create zip for notarization from the project version
-echo -e "${YELLOW}Creating zip of screensaver for notarization...${NC}"
-ditto -c -k --keepParent "${PROJECT_SCREENSAVER}" "${OUTPUT_ZIP}"
+# Create zip for notarization from the fresh build in DerivedData
+echo -e "${YELLOW}Creating zip of screensaver for notarization from fresh build...${NC}"
+ditto -c -k --keepParent "${PRODUCTS_DIR}/${SCREENSAVER_NAME}" "${OUTPUT_ZIP}"
 
 if [ ! -f "${OUTPUT_ZIP}" ]; then
     echo -e "${RED}Failed to create zip file${NC}"
     exit 1
 fi
 
+# Copy to project Resources directory and verify with MD5
+echo -e "${YELLOW}Copying screensaver to project Resources directory...${NC}"
+PROJECT_SCREENSAVER="Resources/${SCREENSAVER_NAME}"
+
+# Remove existing screensaver if present to ensure clean copy
+if [ -d "${PROJECT_SCREENSAVER}" ]; then
+    echo -e "${YELLOW}Removing existing screensaver in Resources...${NC}"
+    rm -rf "${PROJECT_SCREENSAVER}"
+fi
+
+# Copy fresh build to Resources
+cp -R "${PRODUCTS_DIR}/${SCREENSAVER_NAME}" "${PROJECT_SCREENSAVER}"
+
+if [ ! -d "${PROJECT_SCREENSAVER}" ]; then
+    echo -e "${RED}Failed to copy screensaver to project Resources${NC}"
+    exit 1
+fi
+
+# Verify the copy with MD5 checksums
+echo -e "${YELLOW}Verifying copy integrity with MD5...${NC}"
+SOURCE_MD5=$(find "${PRODUCTS_DIR}/${SCREENSAVER_NAME}" -type f -exec md5 -q {} \; | sort | md5 -q)
+DEST_MD5=$(find "${PROJECT_SCREENSAVER}" -type f -exec md5 -q {} \; | sort | md5 -q)
+
+if [ "$SOURCE_MD5" != "$DEST_MD5" ]; then
+    echo -e "${RED}✗ MD5 mismatch! Copy verification failed${NC}"
+    echo "Source MD5: $SOURCE_MD5"
+    echo "Dest MD5: $DEST_MD5"
+    exit 1
+fi
+
+echo -e "${GREEN}✓ MD5 verification passed - screensaver copied correctly${NC}"
+
 # Get file sizes for verification
-SAVER_SIZE=$(du -sh "${PROJECT_SCREENSAVER}" | cut -f1)
+SAVER_SIZE=$(du -sh "${PRODUCTS_DIR}/${SCREENSAVER_NAME}" | cut -f1)
 ZIP_SIZE=$(du -h "${OUTPUT_ZIP}" | cut -f1)
 
 # Summary
@@ -137,10 +163,10 @@ echo ""
 echo -e "${GREEN}========================================${NC}"
 echo -e "${GREEN}Screensaver Build Complete! 🎉${NC}"
 echo -e "${GREEN}========================================${NC}"
-echo "Build output: ${PRODUCTS_DIR}/${SCREENSAVER_NAME}"
-echo "Project resource: ${PROJECT_SCREENSAVER} (${SAVER_SIZE})"
-echo "Preserved at: ${OUTPUT_SAVER} (${SAVER_SIZE})"
-echo "Zip for notarization: ${OUTPUT_ZIP} (${ZIP_SIZE})"
+echo "Build output: ${PRODUCTS_DIR}/${SCREENSAVER_NAME} (${SAVER_SIZE})"
+echo "Project resource: ${PROJECT_SCREENSAVER} (verified with MD5)"
+echo "Preserved at: ${OUTPUT_SAVER}"
+echo "Zip for notarization: ${OUTPUT_ZIP} (${ZIP_SIZE}) - created from fresh build"
 echo ""
 echo "Next steps:"
 echo "1. Run ./notarize_screensaver.sh to notarize the screensaver"
