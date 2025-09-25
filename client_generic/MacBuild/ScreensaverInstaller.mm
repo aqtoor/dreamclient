@@ -164,8 +164,9 @@
 }
 
 - (void)enableScreensaverIfNeeded {
+    g_Log->Info("ScreensaverInstaller: Screensaver enabling disabled in this version");
     // Check if screensaver is installed first
-    if (![self isScreensaverInstalled]) {
+/*    if (![self isScreensaverInstalled]) {
         if (g_Log) g_Log->Info("ScreensaverInstaller: Cannot enable - screensaver not installed");
         return;
     }
@@ -195,7 +196,7 @@
         }];
     } else {
         if (g_Log) g_Log->Info("ScreensaverInstaller: infinidream is already the active screensaver");
-    }
+    }*/
 }
 
 @end
