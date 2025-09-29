@@ -654,7 +654,7 @@ room for new ones</string>
                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
                                         </textField>
-                                        <button hidden="YES" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bnq-I4-c9S">
+                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bnq-I4-c9S">
                                             <rect key="frame" x="111" y="234" width="182" height="16"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                             <buttonCell key="cell" type="check" title="Keep screensaver enabled" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Igz-lb-3fK">
