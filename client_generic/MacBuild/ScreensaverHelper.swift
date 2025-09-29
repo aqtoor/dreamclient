@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import PaperSaver
+import PaperSaverKit
 
 @objc public class ScreensaverHelper: NSObject {
     private let paperSaver = PaperSaver()
@@ -28,7 +28,7 @@ import PaperSaver
         Task {
             do {
                 // Use "infinidream" as the module name
-                try await paperSaver.setScreensaver(module: "infinidream")
+                try await paperSaver.setScreensaverEverywhere(module: "infinidream")
                 await MainActor.run {
                     completion(true, nil)
                 }
@@ -40,13 +40,14 @@ import PaperSaver
         }
     }
     
-    /// Check if any screensaver (not just infinidream) is installed
+    /// Check if any screensaver (not just infinidream) is active
     @objc public func hasActiveScreensaver() -> Bool {
-        return paperSaver.getActiveScreensaver() != nil
+        return !paperSaver.getActiveScreensavers().isEmpty
     }
-    
-    /// Get the name of the currently active screensaver
+
+    /// Get the name of the first currently active screensaver
     @objc public func getActiveScreensaverName() -> String? {
-        return paperSaver.getActiveScreensaver()?.name
+        let activeScreensavers = paperSaver.getActiveScreensavers()
+        return activeScreensavers.first
     }
 }

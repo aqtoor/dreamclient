@@ -319,7 +319,6 @@
 		F07071D82C0E05DA008219A4 /* libboost_thread.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F07071D32C0E052B008219A4 /* libboost_thread.a */; };
 		F07071D92C0E05DA008219A4 /* libboost_system.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F07071D22C0E052B008219A4 /* libboost_system.a */; };
 		F082D4412CBD5CA4001934FB /* Bugsnag in Frameworks */ = {isa = PBXBuildFile; productRef = F0351BE92CB5BB4F0055091F /* Bugsnag */; };
-		F09159DA2E7846B900A66184 /* PaperSaver in Frameworks */ = {isa = PBXBuildFile; productRef = F09159D92E7846B900A66184 /* PaperSaver */; };
 		F0917E092E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
 		F0917E0A2E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
 		F0917E0B2E32764C000DBED8 /* ESAppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0917E082E32764C000DBED8 /* ESAppDelegate.mm */; };
@@ -328,7 +327,8 @@
 		F09BCEBD2DF33CCE00EA1BD3 /* ScreenSaver-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 218878D10EC6CD7E001ABD2E /* ScreenSaver-Info.plist */; };
 		F09CFF602E71D80100054936 /* ScreensaverInstaller.mm in Sources */ = {isa = PBXBuildFile; fileRef = F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */; };
 		F09CFF612E71D80100054936 /* ScreensaverInstaller.mm in Sources */ = {isa = PBXBuildFile; fileRef = F09CFF5F2E71D80100054936 /* ScreensaverInstaller.mm */; };
-		F09CFF642E747DAE00054936 /* PaperSaver in Frameworks */ = {isa = PBXBuildFile; productRef = F09CFF632E747DAE00054936 /* PaperSaver */; };
+		F0ADEC7F2E8ACA480081D61B /* PaperSaverKit in Frameworks */ = {isa = PBXBuildFile; productRef = F0ADEC7E2E8ACA480081D61B /* PaperSaverKit */; };
+		F0ADEC812E8ACA520081D61B /* PaperSaverKit in Frameworks */ = {isa = PBXBuildFile; productRef = F0ADEC802E8ACA520081D61B /* PaperSaverKit */; };
 		F0B66ADF2E02DB8200751811 /* CodeStepViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADB2E02DB8200751811 /* CodeStepViewController.mm */; };
 		F0B66AE02E02DB8200751811 /* EmailStepViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADC2E02DB8200751811 /* EmailStepViewController.mm */; };
 		F0B66AE12E02DB8200751811 /* StartupWindowController.mm in Sources */ = {isa = PBXBuildFile; fileRef = F0B66ADD2E02DB8200751811 /* StartupWindowController.mm */; };
@@ -1010,7 +1010,6 @@
 				466C2AAA2AFA5B8600ED939F /* libpng_universal.a in Frameworks */,
 				467230BD2AC17EAA00017C51 /* Metal.framework in Frameworks */,
 				F0141B9E2C663E8900DBA60E /* libswscale.a in Frameworks */,
-				F09CFF642E747DAE00054936 /* PaperSaver in Frameworks */,
 				F07071D62C0E05DA008219A4 /* libboost_log_setup.a in Frameworks */,
 				467230BB2AC17E9A00017C51 /* MetalKit.framework in Frameworks */,
 				213D540311F79C9800CF500D /* IOKit.framework in Frameworks */,
@@ -1046,6 +1045,7 @@
 				21DC0CA91263B98200D60C6A /* libcurl.4.dylib in Frameworks */,
 				2160FCAF0F30F48200B2C27A /* AppKit.framework in Frameworks */,
 				464A49DF2AB89BC400C77F6D /* VideoToolbox.framework in Frameworks */,
+				F0ADEC7F2E8ACA480081D61B /* PaperSaverKit in Frameworks */,
 				21CE8E3E0F6EE12B00DDF96A /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1149,7 +1149,6 @@
 				F0E9CE7F2C136B0500C4D694 /* libpng_universal.a in Frameworks */,
 				F0E9CE802C136B0500C4D694 /* Metal.framework in Frameworks */,
 				F0141BAC2C663F1500DBA60E /* libswscale.a in Frameworks */,
-				F09159DA2E7846B900A66184 /* PaperSaver in Frameworks */,
 				F0E9CE812C136B0500C4D694 /* libboost_log_setup.a in Frameworks */,
 				F0E9CE822C136B0500C4D694 /* MetalKit.framework in Frameworks */,
 				F0E9CE832C136B0500C4D694 /* IOKit.framework in Frameworks */,
@@ -1185,6 +1184,7 @@
 				F0E9CEA02C136B0500C4D694 /* libcurl.4.dylib in Frameworks */,
 				F0E9CEA12C136B0500C4D694 /* AppKit.framework in Frameworks */,
 				F0E9CEA22C136B0500C4D694 /* VideoToolbox.framework in Frameworks */,
+				F0ADEC812E8ACA520081D61B /* PaperSaverKit in Frameworks */,
 				F0E9CEA32C136B0500C4D694 /* SystemConfiguration.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1646,7 +1646,7 @@
 			packageProductDependencies = (
 				129AC5CF2B69348E00E2E3E8 /* Sparkle */,
 				F0351BEB2CB5BBF10055091F /* Bugsnag */,
-				F09CFF632E747DAE00054936 /* PaperSaver */,
+				F0ADEC7E2E8ACA480081D61B /* PaperSaverKit */,
 			);
 			productName = ElectricSheep;
 			productReference = 2160FAAD0F30F43600B2C27A /* infinidream.app */;
@@ -1719,7 +1719,7 @@
 			packageProductDependencies = (
 				F0E9CE2B2C136B0500C4D694 /* Sparkle */,
 				F0351BED2CB5BBF90055091F /* Bugsnag */,
-				F09159D92E7846B900A66184 /* PaperSaver */,
+				F0ADEC802E8ACA520081D61B /* PaperSaverKit */,
 			);
 			productName = ElectricSheep;
 			productReference = F0E9CEB12C136B0500C4D694 /* infinidream stage.app */;
@@ -3075,7 +3075,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AerialScreensaver/PaperSaver.git";
 			requirement = {
-				branch = master;
+				branch = "0.1.0-dev";
 				kind = branch;
 			};
 		};
@@ -3125,15 +3125,15 @@
 			package = 0397FD582B8C915A00C5D640 /* XCRemoteSwiftPackageReference "bugsnag-cocoa" */;
 			productName = Bugsnag;
 		};
-		F09159D92E7846B900A66184 /* PaperSaver */ = {
+		F0ADEC7E2E8ACA480081D61B /* PaperSaverKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */;
-			productName = PaperSaver;
+			productName = PaperSaverKit;
 		};
-		F09CFF632E747DAE00054936 /* PaperSaver */ = {
+		F0ADEC802E8ACA520081D61B /* PaperSaverKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */;
-			productName = PaperSaver;
+			productName = PaperSaverKit;
 		};
 		F0E9CE2B2C136B0500C4D694 /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
