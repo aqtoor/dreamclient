@@ -3075,8 +3075,8 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AerialScreensaver/PaperSaver.git";
 			requirement = {
-				branch = "0.1.0-dev";
-				kind = branch;
+				kind = exactVersion;
+				version = 0.1.0;
 			};
 		};
 		F0E9CE2C2C136B0500C4D694 /* XCRemoteSwiftPackageReference "sparkle" */ = {
