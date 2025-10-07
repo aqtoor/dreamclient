@@ -43,25 +43,41 @@ cd client_generic/MacBuild
 ```
 
 ### Options
+- `-r` : Build in Release mode (default: Debug)
 - `-s` : Build stage version (default: production)
-- `-d` : Build in Debug mode (default: Release)
-- `-n` : Enable notarization (requires Developer ID)
+- `-n` : Enable notarization (requires `-r`)
+
+### Code Signing
+Auto-discovers Developer ID certificate and Team ID from keychain.
+
+Override via environment variables:
+```bash
+DEVELOPER_ID_CERT="Developer ID Application: Your Name (TEAM123)" \
+TEAM_ID="TEAM123" \
+KEYCHAIN_PROFILE="your-profile" \
+./build.sh -r
+```
+
+Default keychain profile: `infinidream-notarization`
 
 ### Examples
 ```bash
-# Production release build
+# Debug build (default)
 ./build.sh
 
-# Stage debug build
-./build.sh -s -d
+# Release build
+./build.sh -r
 
-# Production release with notarization
-./build.sh -n
+# Stage debug build
+./build.sh -s
+
+# Release with notarization
+./build.sh -r -n
 ```
 
 ### Output
 - Screensaver: `build/DerivedData/Build/Products/{Debug|Release}/infinidream.saver`
-- Application: `build/DerivedData/Build/Products/{Debug|Release}/infinidream.app`
+- Application: `build/{Debug|Release}/AppExport/infinidream.app`
 
 The app bundle contains the embedded screensaver at `infinidream.app/Contents/Resources/infinidream.saver`.
 
