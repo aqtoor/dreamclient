@@ -2577,7 +2577,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				COPY_PHASE_STRIP = YES;
+				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = BNXH8TLP5D;
@@ -3068,7 +3068,7 @@
 			repositoryURL = "https://github.com/sparkle-project/sparkle";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 2.5.2;
+				minimumVersion = 2.8.0;
 			};
 		};
 		F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */ = {
