@@ -26,33 +26,33 @@ jobs:
           # Install xcpretty
           gem install xcpretty
 
-      - name: Import Code Signing Certificate
-        env:
-          MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
-          MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
-        run: |
-          # Create keychain
-          KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
-          KEYCHAIN_PASSWORD=$(openssl rand -base64 32)
-
-          security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-          security default-keychain -s "$KEYCHAIN_PATH"
-          security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-
-          # Import certificate
-          echo "$MACOS_CERTIFICATE" | base64 --decode > certificate.p12
-          security import certificate.p12 \
-            -k "$KEYCHAIN_PATH" \
-            -P "$MACOS_CERTIFICATE_PWD" \
-            -T /usr/bin/codesign \
-            -T /usr/bin/security
-
-          # Allow codesign to access keychain
-          security set-key-partition-list -S apple-tool:,apple:,codesign: \
-            -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
-
-          # Clean up
-          rm certificate.p12
+      # - name: Import Code Signing Certificate
+      #   env:
+      #     MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+      #     MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+      #   run: |
+      #     # Create keychain
+      #     KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+      #     KEYCHAIN_PASSWORD=$(openssl rand -base64 32)
+      #
+      #     security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+      #     security default-keychain -s "$KEYCHAIN_PATH"
+      #     security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+      #
+      #     # Import certificate
+      #     echo "$MACOS_CERTIFICATE" | base64 --decode > certificate.p12
+      #     security import certificate.p12 \
+      #       -k "$KEYCHAIN_PATH" \
+      #       -P "$MACOS_CERTIFICATE_PWD" \
+      #       -T /usr/bin/codesign \
+      #       -T /usr/bin/security
+      #
+      #     # Allow codesign to access keychain
+      #     security set-key-partition-list -S apple-tool:,apple:,codesign: \
+      #       -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+      #
+      #     # Clean up
+      #     rm certificate.p12
 
       - name: Setup API Key for Notarization
         env:
@@ -90,7 +90,7 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Cleanup Keychain
-        if: always()
-        run: |
-          security delete-keychain $RUNNER_TEMP/app-signing.keychain-db || true
+      # - name: Cleanup Keychain
+      #   if: always()
+      #   run: |
+      #     security delete-keychain $RUNNER_TEMP/app-signing.keychain-db || true
