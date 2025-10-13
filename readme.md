@@ -60,7 +60,7 @@ KEYCHAIN_PROFILE="your-profile" \
 
 Default keychain profile: `infinidream-notarization`
 
-### Examples
+### Examples 
 ```bash
 # Debug build (default)
 ./build.sh
