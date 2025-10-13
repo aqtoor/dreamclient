@@ -10,7 +10,7 @@ on:
 jobs:
   build:
     name: Build and Notarize
-    runs-on: macos-latest  # macOS Tahoe
+    runs-on: macos-26  # macOS Tahoe
 
     steps:
       - name: Checkout repository
