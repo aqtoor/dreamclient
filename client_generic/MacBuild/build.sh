@@ -19,6 +19,7 @@ NC='\033[0m' # No Color
 BUILD_RELEASE=false
 BUILD_STAGE=false
 NOTARIZE=false
+USE_API_KEY=false
 BUILD_CONFIG="Debug"
 SCREENSAVER_SCHEME="ScreenSaver Prod"
 APP_SCHEME="infinidream App Prod"
@@ -65,8 +66,14 @@ if [ -z "$KEYCHAIN_PROFILE" ]; then
     KEYCHAIN_PROFILE="infinidream-notarization"
 fi
 
+# API Key configuration for notarization (alternative to keychain profile)
+# These can be overridden by environment variables: APPSTORECONNECT_API_KEY_ID, APPSTORECONNECT_API_ISSUER_ID, APPSTORECONNECT_API_KEY_PATH
+if [ -z "$APPSTORECONNECT_API_KEY_PATH" ] && [ -n "$APPSTORECONNECT_API_KEY_ID" ]; then
+    APPSTORECONNECT_API_KEY_PATH="$HOME/private_keys/AuthKey_${APPSTORECONNECT_API_KEY_ID}.p8"
+fi
+
 # Parse command line arguments
-while getopts "rsn" opt; do
+while getopts "rsnk" opt; do
     case ${opt} in
         r )
             BUILD_RELEASE=true
@@ -82,16 +89,29 @@ while getopts "rsn" opt; do
         n )
             NOTARIZE=true
             ;;
+        k )
+            USE_API_KEY=true
+            ;;
         \? )
-            echo "Usage: $0 [-r] [-s] [-n]"
+            echo "Usage: $0 [-r] [-s] [-n] [-k]"
             echo "  -r : Build in Release mode (default: Debug)"
             echo "  -s : Build stage version (default: production)"
             echo "  -n : Enable notarization (requires -r)"
+            echo "  -k : Use API Key for notarization (default: keychain profile)"
             echo ""
             echo "Environment variables (optional overrides):"
-            echo "  DEVELOPER_ID_CERT : Code signing certificate name"
-            echo "  TEAM_ID           : Apple Developer Team ID"
-            echo "  KEYCHAIN_PROFILE  : Notarization keychain profile name"
+            echo "  Code Signing:"
+            echo "    DEVELOPER_ID_CERT : Code signing certificate name"
+            echo "    TEAM_ID           : Apple Developer Team ID"
+            echo ""
+            echo "  Notarization (Keychain Profile method - default):"
+            echo "    KEYCHAIN_PROFILE  : Notarization keychain profile name"
+            echo ""
+            echo "  Notarization (API Key method - requires -k flag):"
+            echo "    APPSTORECONNECT_API_KEY_ID      : App Store Connect API Key ID"
+            echo "    APPSTORECONNECT_API_ISSUER_ID   : App Store Connect API Issuer ID"
+            echo "    APPSTORECONNECT_API_KEY_PATH    : Path to .p8 API key file"
+            echo "                                      (default: ~/private_keys/AuthKey_\${KEY_ID}.p8)"
             exit 1
             ;;
     esac
@@ -101,6 +121,22 @@ done
 if [ "$NOTARIZE" = true ] && [ "$BUILD_RELEASE" = false ]; then
     echo -e "${RED}Error: Notarization requires Release mode. Use -r flag with -n${NC}"
     exit 1
+fi
+
+# Validate API Key configuration if enabled
+if [ "$USE_API_KEY" = true ] && [ "$NOTARIZE" = true ]; then
+    if [ -z "$APPSTORECONNECT_API_KEY_ID" ] || [ -z "$APPSTORECONNECT_API_ISSUER_ID" ]; then
+        echo -e "${RED}Error: API Key notarization requires environment variables:${NC}"
+        echo "  APPSTORECONNECT_API_KEY_ID"
+        echo "  APPSTORECONNECT_API_ISSUER_ID"
+        echo "  APPSTORECONNECT_API_KEY_PATH (optional, default: ~/private_keys/AuthKey_\${KEY_ID}.p8)"
+        exit 1
+    fi
+    if [ ! -f "$APPSTORECONNECT_API_KEY_PATH" ]; then
+        echo -e "${RED}Error: API Key file not found: ${APPSTORECONNECT_API_KEY_PATH}${NC}"
+        echo "Please ensure the .p8 key file exists at the specified path."
+        exit 1
+    fi
 fi
 
 # Configuration
@@ -143,9 +179,17 @@ else
     echo -e "Code Signing: Disabled"
 fi
 
-# Show notarization profile if notarization is enabled
+# Show notarization configuration if notarization is enabled
 if [ "$NOTARIZE" = true ]; then
-    echo -e "Notarization Profile: ${KEYCHAIN_PROFILE}"
+    if [ "$USE_API_KEY" = true ]; then
+        echo -e "Notarization Method: ${BLUE}API Key${NC}"
+        echo -e "  Key ID: ${APPSTORECONNECT_API_KEY_ID}"
+        echo -e "  Issuer ID: ${APPSTORECONNECT_API_ISSUER_ID}"
+        echo -e "  Key Path: ${APPSTORECONNECT_API_KEY_PATH}"
+    else
+        echo -e "Notarization Method: ${BLUE}Keychain Profile${NC}"
+        echo -e "  Profile: ${KEYCHAIN_PROFILE}"
+    fi
 fi
 
 echo -e "${BLUE}========================================${NC}"
@@ -305,9 +349,19 @@ if [ "$NOTARIZE" = true ]; then
     echo -e "${YELLOW}This may take several minutes...${NC}"
 
     # Capture notarization output
-    NOTARY_OUTPUT=$(xcrun notarytool submit "${SCREENSAVER_ZIP}" \
-                     --keychain-profile "$KEYCHAIN_PROFILE" \
-                     --wait 2>&1)
+    if [ "$USE_API_KEY" = true ]; then
+        # Use API Key authentication
+        NOTARY_OUTPUT=$(xcrun notarytool submit "${SCREENSAVER_ZIP}" \
+                         --key "$APPSTORECONNECT_API_KEY_PATH" \
+                         --key-id "$APPSTORECONNECT_API_KEY_ID" \
+                         --issuer "$APPSTORECONNECT_API_ISSUER_ID" \
+                         --wait 2>&1)
+    else
+        # Use keychain profile authentication
+        NOTARY_OUTPUT=$(xcrun notarytool submit "${SCREENSAVER_ZIP}" \
+                         --keychain-profile "$KEYCHAIN_PROFILE" \
+                         --wait 2>&1)
+    fi
 
     # Display the output
     echo "$NOTARY_OUTPUT"
@@ -527,9 +581,19 @@ if [ "$NOTARIZE" = true ]; then
     echo -e "${YELLOW}This may take several minutes...${NC}"
 
     # Capture notarization output
-    NOTARY_OUTPUT=$(xcrun notarytool submit "${APP_ZIP}" \
-                     --keychain-profile "$KEYCHAIN_PROFILE" \
-                     --wait 2>&1)
+    if [ "$USE_API_KEY" = true ]; then
+        # Use API Key authentication
+        NOTARY_OUTPUT=$(xcrun notarytool submit "${APP_ZIP}" \
+                         --key "$APPSTORECONNECT_API_KEY_PATH" \
+                         --key-id "$APPSTORECONNECT_API_KEY_ID" \
+                         --issuer "$APPSTORECONNECT_API_ISSUER_ID" \
+                         --wait 2>&1)
+    else
+        # Use keychain profile authentication
+        NOTARY_OUTPUT=$(xcrun notarytool submit "${APP_ZIP}" \
+                         --keychain-profile "$KEYCHAIN_PROFILE" \
+                         --wait 2>&1)
+    fi
 
     # Display the output
     echo "$NOTARY_OUTPUT"

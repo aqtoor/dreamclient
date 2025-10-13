@@ -1,0 +1,109 @@
+name: Build macOS App
+
+  on:
+    push:
+      branches: [ci-setup]  # Add master later after testing
+    pull_request:
+      branches: [master]
+    workflow_dispatch:  # Allow manual triggers
+
+  jobs:
+    build:
+      name: Build and Notarize
+      runs-on: macos-latest  # macOS Tahoe
+
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+          with:
+            lfs: true  # Your repo uses git-lfs
+
+        - name: Setup Git LFS
+          run: git lfs pull
+
+        - name: Install dependencies
+          run: |
+            # Install xcpretty
+            gem install xcpretty
+
+        - name: Import Code Signing Certificate
+          env:
+            MACOS_CERTIFICATE: ${{ secrets.MACOS_CERTIFICATE }}
+            MACOS_CERTIFICATE_PWD: ${{ secrets.MACOS_CERTIFICATE_PWD }}
+          run: |
+            # Create keychain
+            KEYCHAIN_PATH=$RUNNER_TEMP/app-signing.keychain-db
+            KEYCHAIN_PASSWORD=$(openssl rand -base64 32)
+
+            security create-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+            security set-keychain-default "$KEYCHAIN_PATH"
+            security unlock-keychain -p "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+            # Import certificate
+            echo "$MACOS_CERTIFICATE" | base64 --decode > certificate.p12
+            security import certificate.p12 \
+              -k "$KEYCHAIN_PATH" \
+              -P "$MACOS_CERTIFICATE_PWD" \
+              -T /usr/bin/codesign \
+              -T /usr/bin/security
+
+            # Allow codesign to access keychain
+            security set-key-partition-list -S apple-tool:,apple:,codesign: \
+              -s -k "$KEYCHAIN_PASSWORD" "$KEYCHAIN_PATH"
+
+            # Clean up
+            rm certificate.p12
+
+        - name: Setup Notarization Profile (App-Specific Password)
+          if: secrets.APPLE_ID != ''
+          env:
+            APPLE_ID: ${{ secrets.APPLE_ID }}
+            APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
+            APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          run: |
+            xcrun notarytool store-credentials "infinidream-notarization" \
+              --apple-id "$APPLE_ID" \
+              --password "$APPLE_ID_PASSWORD" \
+              --team-id "$APPLE_TEAM_ID"
+
+        - name: Setup API Key for Notarization
+          if: secrets.APPSTORECONNECT_API_KEY != ''
+          env:
+            APPSTORECONNECT_API_KEY: ${{ secrets.APPSTORECONNECT_API_KEY }}
+            APPSTORECONNECT_API_KEY_ID: ${{ secrets.APPSTORECONNECT_API_KEY_ID }}
+          run: |
+            # Create API key file (used directly by build.sh with -k flag)
+            mkdir -p ~/private_keys
+            echo "$APPSTORECONNECT_API_KEY" | base64 --decode > ~/private_keys/AuthKey_${APPSTORECONNECT_API_KEY_ID}.p8
+
+        - name: Build Debug
+          run: |
+            cd client_generic/MacBuild
+            ./build.sh
+          env:
+            DEVELOPER_ID_CERT: "Developer ID Application: e-dream, inc (BNXH8TLP5D)"
+            TEAM_ID: "BNXH8TLP5D"
+            APPSTORECONNECT_API_KEY_ID: ${{ secrets.APPSTORECONNECT_API_KEY_ID }}
+            APPSTORECONNECT_API_ISSUER_ID: ${{ secrets.APPSTORECONNECT_API_ISSUER_ID }}
+            APPSTORECONNECT_API_KEY_PATH: ${{ format('~/private_keys/AuthKey_{0}.p8', secrets.APPSTORECONNECT_API_KEY_ID) }}
+
+        - name: Upload Build Artifacts
+          uses: actions/upload-artifact@v4
+          with:
+            name: infinidream-macos-${{ github.sha }}
+            path: |
+              client_generic/MacBuild/build/Debug/*.zip
+            retention-days: 30
+
+        - name: Upload to Release (on tag)
+          if: startsWith(github.ref, 'refs/tags/')
+          uses: softprops/action-gh-release@v1
+          with:
+            files: client_generic/MacBuild/build/Debug/*.zip
+          env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+        - name: Cleanup Keychain
+          if: always()
+          run: |
+            security delete-keychain $RUNNER_TEMP/app-signing.keychain-db || true
