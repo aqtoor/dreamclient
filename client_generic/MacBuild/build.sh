@@ -245,7 +245,17 @@ else
                -derivedDataPath "$DERIVED_DATA" \
                CODE_SIGN_IDENTITY="" \
                CODE_SIGNING_REQUIRED=NO \
-               CODE_SIGNING_ALLOWED=NO
+               CODE_SIGNING_ALLOWED=NO \
+               | xcpretty --color || {
+        # Fallback if xcpretty is not installed
+        xcodebuild -project "$PROJECT" \
+                   -scheme "$SCREENSAVER_SCHEME" \
+                   -configuration "$BUILD_CONFIG" \
+                   -derivedDataPath "$DERIVED_DATA" \
+                   CODE_SIGN_IDENTITY="" \
+                   CODE_SIGNING_REQUIRED=NO \
+                   CODE_SIGNING_ALLOWED=NO
+    }
 fi
 
 # Verify screensaver build
@@ -424,6 +434,32 @@ if [ "$NOTARIZE" = true ]; then
     else
         echo -e "${YELLOW}⚠ Could not verify notarization (this may be normal for screensavers)${NC}"
     fi
+fi
+
+# For Debug builds, stop here (no archive/export/packaging needed)
+if [ "$BUILD_RELEASE" = false ]; then
+    echo ""
+    echo -e "${GREEN}========================================${NC}"
+    echo -e "${GREEN}Debug Build Complete! 🎉${NC}"
+    echo -e "${GREEN}========================================${NC}"
+    if [ "$BUILD_STAGE" = true ]; then
+        echo "Environment: STAGE"
+    else
+        echo "Environment: PRODUCTION"
+    fi
+    echo "Configuration: ${BUILD_CONFIG}"
+    echo ""
+    echo "Build outputs:"
+    SAVER_SIZE=$(du -sh "${OUTPUT_SAVER}" | cut -f1)
+    echo "  Screensaver (DerivedData): ${PRODUCTS_DIR}/${SCREENSAVER_NAME} (${SAVER_SIZE})"
+    echo "  Screensaver (output): ${OUTPUT_SAVER}"
+    echo "  Screensaver (Resources): ${PROJECT_SCREENSAVER}"
+    echo "  Screensaver zip: ${SCREENSAVER_ZIP}"
+    echo ""
+    echo "Note: Debug builds skip archive/export steps."
+    echo "To build for distribution, use: ./build.sh -r$([ "$BUILD_STAGE" = true ] && echo " -s")"
+    echo ""
+    exit 0
 fi
 
 # ============================================================================
