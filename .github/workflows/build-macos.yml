@@ -55,7 +55,7 @@ jobs:
           rm certificate.p12
 
       - name: Setup Notarization Profile (App-Specific Password)
-        if: secrets.APPLE_ID != ''
+        if: ${{ secrets.APPLE_ID != '' }}
         env:
           APPLE_ID: ${{ secrets.APPLE_ID }}
           APPLE_ID_PASSWORD: ${{ secrets.APPLE_ID_PASSWORD }}
@@ -67,7 +67,7 @@ jobs:
             --team-id "$APPLE_TEAM_ID"
 
       - name: Setup API Key for Notarization
-        if: secrets.APPSTORECONNECT_API_KEY != ''
+        if: ${{ secrets.APPSTORECONNECT_API_KEY != '' }}
         env:
           APPSTORECONNECT_API_KEY: ${{ secrets.APPSTORECONNECT_API_KEY }}
           APPSTORECONNECT_API_KEY_ID: ${{ secrets.APPSTORECONNECT_API_KEY_ID }}
