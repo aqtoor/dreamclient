@@ -336,10 +336,15 @@ class CStatsConsole : public CConsole
         if (!CHudEntry::Render(_time, _spRenderer))
             return false;
         //CHudEntry::Render(_time, _spRenderer);
+
+        // Make a copy of m_Stats to avoid race condition as it can change
+        // this seemsprevalent just after login.
+        auto stats_copy = m_Stats;
+
         PlatformUtils::DispatchOnMainThread(
             [=, this]()
             {
-                if (g_Player().Stopped() || m_Stats.empty() || !g_Player().HasStarted())
+                if (g_Player().Stopped() || stats_copy.empty() || !g_Player().HasStarted())
                     return;
                 float step = (float)m_Desc.Height() /
                              (float)_spRenderer->Display()->Height();
@@ -349,14 +354,14 @@ class CStatsConsole : public CConsole
                 //	Figure out text extent for all strings.
                 std::queue<Base::Math::CVector2> sizeq;
                 m_TotalExtent = {0, 0, 0, 0};
-                for (auto i = m_Stats.begin(); i != m_Stats.end(); ++i)
+                for (auto i = stats_copy.begin(); i != stats_copy.end(); ++i)
                 {
                     CStat* e = i->second.stat;
-                    DisplayOutput::spCBaseText& text = i->second.text;
+                    const DisplayOutput::spCBaseText& text = i->second.text;
                     if (text && e)
                     {
                         text->SetEnabled(e->Visible());
-                        
+
                         if (e && e->Visible())
                         {
                             text->SetText(e->Report(_time));
@@ -367,7 +372,7 @@ class CStatsConsole : public CConsole
                             pos += sizeq.back().m_Y;
                         }
                     }
- 
+
                 }
 
                 // align soft quad at bottom
@@ -375,14 +380,14 @@ class CStatsConsole : public CConsole
                 m_TotalExtent.m_Y1 = 1.f;
                 // align text at bottom
                 pos = m_TotalExtent.m_Y0 + edge;
-                for (auto i = m_Stats.begin(); i != m_Stats.end(); ++i)
+                for (auto i = stats_copy.begin(); i != stats_copy.end(); ++i)
                 {
                     CStat* e = i->second.stat;
                     if (e && e->Visible())
                     {
                         Base::Math::CVector2 size = sizeq.front();
                         sizeq.pop();
-                        DisplayOutput::spCBaseText& text = i->second.text;
+                        const DisplayOutput::spCBaseText& text = i->second.text;
                         text->SetRect(Base::Math::CRect(edge, pos, 1,
                                                         size.m_Y + pos + step));
                         pos += size.m_Y;
