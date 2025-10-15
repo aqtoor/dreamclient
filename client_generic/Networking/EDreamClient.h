@@ -7,6 +7,7 @@
 #include <mutex>
 #include <tuple>
 #include <sstream>
+#include <thread>
 #include <boost/asio.hpp>
 #include <boost/asio/steady_timer.hpp>
 #include <boost/json.hpp>
@@ -93,6 +94,7 @@ private:
     static std::unique_ptr<boost::asio::io_context> io_context;
     static std::unique_ptr<boost::asio::steady_timer> ping_timer;
     static std::unique_ptr<boost::asio::steady_timer> quota_timer;
+    static std::unique_ptr<std::thread> io_context_thread;
     static void ScheduleNextPing();
     static void ScheduleNextQuotaUpdate();
     static void UpdateQuota();

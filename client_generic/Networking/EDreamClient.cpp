@@ -102,6 +102,7 @@ static void SetNewAndDeleteOldString(
 std::unique_ptr<boost::asio::io_context> EDreamClient::io_context = std::make_unique<boost::asio::io_context>();
 std::unique_ptr<boost::asio::steady_timer> EDreamClient::ping_timer = std::make_unique<boost::asio::steady_timer>(*io_context);
 std::unique_ptr<boost::asio::steady_timer> EDreamClient::quota_timer = std::make_unique<boost::asio::steady_timer>(*io_context);
+std::unique_ptr<std::thread> EDreamClient::io_context_thread = nullptr;
 
 // MARK: Ping via websocket
 void EDreamClient::SendPing()
@@ -303,10 +304,23 @@ void EDreamClient::DeinitializeClient()
     if (g_Client()->IsMultipleInstancesMode()) {
         return;
     }
+
+    g_Log->Info("DeinitializeClient: Starting shutdown sequence");
+
     // Stop the timers and io_context
     ping_timer->cancel();
     quota_timer->cancel();
     io_context->stop();
+
+    // Join the io_context thread before destroying io_context
+    // This prevents the use-after-free crash where async operations try to access
+    // the destroyed io_context after static destructors run
+    if (io_context_thread && io_context_thread->joinable()) {
+        g_Log->Info("DeinitializeClient: Waiting for io_context thread to finish");
+        io_context_thread->join();
+        io_context_thread.reset();
+        g_Log->Info("DeinitializeClient: io_context thread joined successfully");
+    }
 
     // Send goodbye message
     SendGoodbye();
@@ -317,13 +331,15 @@ void EDreamClient::DeinitializeClient()
     // IF we fix this, we can reenable connection closing and enable account switwching
     // Close the WebSocket connection
     //s_SIOClient.close();
-  
+
     /*
     s_SIOClient.set_open_listener(nullptr);
     s_SIOClient.set_close_listener(nullptr);
     s_SIOClient.set_fail_listener(nullptr);
     s_SIOClient.set_reconnecting_listener(nullptr);
     s_SIOClient.set_reconnect_listener(nullptr);*/
+
+    g_Log->Info("DeinitializeClient: Shutdown sequence completed");
 }
 
 // MARK : Auth (via refresh)
@@ -404,11 +420,8 @@ void EDreamClient::DidSignIn()
     boost::thread delayedWebSocketThread([]() {
         boost::this_thread::sleep(boost::posix_time::milliseconds(500));
 
-        // Restart the io_context if it was stopped during SignOut/DeinitializeClient
-        if (io_context->stopped()) {
-            g_Log->Info("Restarting io_context after sign-in");
-            io_context->restart();
-        }
+        // NOTE: io_context restart is now handled in ConnectRemoteControlSocket()
+        // to ensure proper sequencing with thread cleanup
 
         // Start the quota update timer
         ScheduleNextQuotaUpdate();
@@ -1872,12 +1885,12 @@ void EDreamClient::SendPlayingDream(std::string uuid)
 void EDreamClient::ConnectRemoteControlSocket()
 {
     PlatformUtils::SetThreadName("ConnectRemoteControl");
-    
+
     // Use mutex to prevent concurrent connection attempts
     std::lock_guard<std::mutex> lock(fWebSocketMutex);
-    
+
     g_Log->Info("Performing remote control connect.");
-    
+
     // Check if socket is already connected AND io_context is running
     if (s_SIOClient.opened() && !io_context->stopped())
     {
@@ -1885,40 +1898,64 @@ void EDreamClient::ConnectRemoteControlSocket()
         EDreamClient::fIsWebSocketConnected.exchange(true);
         return;
     }
-    
+
     // If io_context was stopped, the connection is effectively dead
     if (io_context->stopped()) {
         g_Log->Info("WebSocket connection was stopped, reconnecting...");
         EDreamClient::fIsWebSocketConnected.exchange(false);
     }
-    
+
+    // Clean up old thread before doing anything else
+    // This ensures proper sequencing: stop old work, restart io_context, create new thread,
+    // then schedule new work (connect socket, send ping)
+    if (io_context_thread && io_context_thread->joinable()) {
+        g_Log->Info("ConnectRemoteControlSocket: Stopping and joining existing io_context thread before reconnecting");
+        io_context->stop();  // Signal the old thread to exit
+        io_context_thread->join();  // Wait for it to finish
+        io_context_thread.reset();  // Release the old thread object
+        g_Log->Info("ConnectRemoteControlSocket: Old thread cleaned up");
+    }
+
+    // Restart io_context if it was stopped (either by us above, or by DeinitializeClient)
+    if (io_context->stopped()) {
+        g_Log->Info("ConnectRemoteControlSocket: Restarting io_context");
+        io_context->restart();
+    }
+
+    // Create new io_context thread BEFORE connecting socket or scheduling work
+    // This ensures the thread is ready to process any async operations
+    auto* io_ctx_ptr = io_context.get();
+    io_context_thread = std::make_unique<std::thread>([io_ctx_ptr]() {
+        PlatformUtils::SetThreadName("io_context");
+        io_ctx_ptr->run();
+        g_Log->Info("io_context thread exiting");
+    });
+    g_Log->Info("ConnectRemoteControlSocket: New io_context thread created");
+
+    // NOW it's safe to bind callbacks and connect
     BindWebSocketCallbacks();
     std::map<std::string, std::string> query;
-    
+
     std::string sealedSession = g_Settings()->Get("settings.content.sealed_session", std::string(""));
-    
+
     if (sealedSession.empty())
     {
         g_Log->Error("Cannot connect WebSocket: no sealed session available.");
         return;
     }
-    
+
     query["Cookie"] = string_format("wos-session=%s", sealedSession.c_str());
     query["Edream-Client-Type"] = PlatformUtils::GetPlatformName();
     query["Edream-Client-Version"] = PlatformUtils::GetAppVersion();
 
-    g_Log->Info("Connecting to WebSocket server: %s", 
+    g_Log->Info("Connecting to WebSocket server: %s",
                 ServerConfig::ServerConfigManager::getInstance().getWebsocketServer().c_str());
-    
-    s_SIOClient.connect(ServerConfig::ServerConfigManager::getInstance().getWebsocketServer(), query, query);
-    
-    // Send first ping immediately so frontend knows we're here
-    SendPing();
 
-    // Run the io_context in a separate thread
-    std::thread([&]() {
-        io_context->run();
-    }).detach();
+    s_SIOClient.connect(ServerConfig::ServerConfigManager::getInstance().getWebsocketServer(), query, query);
+
+    // Send first ping immediately so frontend knows we're here
+    // This is safe now because io_context_thread is already running
+    SendPing();
 }
 
 void EDreamClient::Like(std::string uuid) {
