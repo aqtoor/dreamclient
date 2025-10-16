@@ -566,7 +566,6 @@
 		F0E9CE9C2C136B0500C4D694 /* libz.1.2.5.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 212B1AD90E8E6E0100CE185C /* libz.1.2.5.dylib */; };
 		F0E9CE9D2C136B0500C4D694 /* libbz2.1.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 212B1ADD0E8E6E5000CE185C /* libbz2.1.0.dylib */; };
 		F0E9CE9E2C136B0500C4D694 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464A49DD2AB88E1A00C77F6D /* Security.framework */; };
-		F0E9CE9F2C136B0500C4D694 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = F0E9CE2B2C136B0500C4D694 /* Sparkle */; };
 		F0E9CEA02C136B0500C4D694 /* libcurl.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 211CDDEB0ED0BE8300EB9394 /* libcurl.4.dylib */; };
 		F0E9CEA12C136B0500C4D694 /* AppKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2135D2670EC70571005E246D /* AppKit.framework */; };
 		F0E9CEA22C136B0500C4D694 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 464A49DA2AB8864600C77F6D /* VideoToolbox.framework */; };
@@ -1178,7 +1177,6 @@
 				F0141BAB2C663F1500DBA60E /* libswresample.a in Frameworks */,
 				F0E9CE9D2C136B0500C4D694 /* libbz2.1.0.dylib in Frameworks */,
 				F0E9CE9E2C136B0500C4D694 /* Security.framework in Frameworks */,
-				F0E9CE9F2C136B0500C4D694 /* Sparkle in Frameworks */,
 				F0E9CEA02C136B0500C4D694 /* libcurl.4.dylib in Frameworks */,
 				F0E9CEA12C136B0500C4D694 /* AppKit.framework in Frameworks */,
 				F0E9CEA22C136B0500C4D694 /* VideoToolbox.framework in Frameworks */,
@@ -1714,7 +1712,6 @@
 			);
 			name = "infinidream Stage";
 			packageProductDependencies = (
-				F0E9CE2B2C136B0500C4D694 /* Sparkle */,
 				F0351BED2CB5BBF90055091F /* Bugsnag */,
 				F0ADEC802E8ACA520081D61B /* PaperSaverKit */,
 			);
@@ -3067,14 +3064,6 @@
 				version = 0.1.0;
 			};
 		};
-		F0E9CE2C2C136B0500C4D694 /* XCRemoteSwiftPackageReference "sparkle" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sparkle-project/sparkle";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.5.2;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -3117,11 +3106,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = F09CFF622E747DAE00054936 /* XCRemoteSwiftPackageReference "PaperSaver" */;
 			productName = PaperSaverKit;
-		};
-		F0E9CE2B2C136B0500C4D694 /* Sparkle */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = F0E9CE2C2C136B0500C4D694 /* XCRemoteSwiftPackageReference "sparkle" */;
-			productName = Sparkle;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
