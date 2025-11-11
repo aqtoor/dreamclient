@@ -1381,6 +1381,12 @@ void CPlayer::SkipToNext()
                 }
             }
             
+            // Skip if we've already moved on to something else
+            if (!m_PreloadingNextClip || m_PreloadingDreamUUID != dream->uuid) {
+               g_Log->Info("Preloading aborted, user likely pressed next again");
+               return;
+            }
+            
             // Now create the clip on a background thread
             auto du = m_displayUnits[0];
             int32_t displayMode = g_Settings()->Get("settings.player.DisplayMode", 2);
@@ -1459,6 +1465,12 @@ void CPlayer::SkipToNext()
             }
         }
         
+        // Skip if we've already moved on to something else
+        if (!m_PreloadingNextClip || m_PreloadingDreamUUID != dream->uuid) {
+           g_Log->Info("Preloading aborted, user likely pressed next again");
+           return;
+        }
+        
         // Create clip on background thread
         auto du = m_displayUnits[0];
         int32_t displayMode = g_Settings()->Get("settings.player.DisplayMode", 2);
@@ -1474,11 +1486,6 @@ void CPlayer::SkipToNext()
         // Switch to main thread for player state updates
         writer_lock l(m_UpdateMutex);
         
-        // Skip if we've already moved on to something else
-        if (!m_PreloadingNextClip || m_PreloadingDreamUUID != dream->uuid) {
-           g_Log->Info("Preloading aborted, user likely pressed next again");
-           return;
-        }
 
         g_Log->Info("Async preloading complete, starting transition now");
 
