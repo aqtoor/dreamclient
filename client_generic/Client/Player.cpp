@@ -1349,7 +1349,6 @@ void CPlayer::SkipToNext()
         
         // For cached dreams, we can use the synchronous approach (it's fast)
         if (isDreamCached) {
-            g_Log->Info("Next1");
             // Make sure current clip fades out properly
             if (m_currentClip) {
                 float currentFadeIn = m_currentClip->m_FadeInSeconds;
@@ -1378,13 +1377,13 @@ void CPlayer::SkipToNext()
         m_PreloadingDreamUUID = nextDecision->dream->uuid;
         
         // Start a buffering pause immediately (don't wait for clip to be created)
-        SetPausedForBuffering(true);
-        SetPaused(true);
+        //SetPausedForBuffering(true);
+        //SetPaused(true);
         
         // Create the clip asynchronously to avoid blocking
         std::thread([this, nextDecision, currentProgress]() {
             auto dream = nextDecision->dream;
-            g_Log->Info("Next2");
+            
             // Get the path (cache or streaming)
             auto path = dream->getCachedPath();
             if (path.empty()) {
@@ -1394,6 +1393,14 @@ void CPlayer::SkipToNext()
                     dream->setStreamingUrl(path);
                 }
             }
+            
+            // Skip if we've already moved on to something else
+            if (!m_PreloadingNextClip || m_PreloadingDreamUUID != dream->uuid) {
+               g_Log->Info("Preloading aborted, user likely pressed next again");
+                //m_nextIsRunning = false;
+                if (g_Client()) g_Client()->NotifyNextCommandCompleted();
+                return;
+             }
             
             // Now create the clip on a background thread
             auto du = m_displayUnits[0];
@@ -1428,9 +1435,12 @@ void CPlayer::SkipToNext()
         return;
     }
     
+    
+    
+
+    
     // For cached dreams, use synchronous approach
     if (isDreamCached) {
-        g_Log->Info("Next3");
         // Set short transition duration for quick fade
         m_transitionDuration = 1.0f;
         StartTransition();
@@ -1462,7 +1472,7 @@ void CPlayer::SkipToNext()
     // Create the clip asynchronously
     std::thread([this, nextDecision]() {
         auto dream = nextDecision->dream;
-        g_Log->Info("Next4");
+        
         // Get path or streaming link
         auto path = dream->getCachedPath();
         if (path.empty()) {
@@ -1471,6 +1481,14 @@ void CPlayer::SkipToNext()
                 path = EDreamClient::GetDreamDownloadLink(dream->uuid);
                 dream->setStreamingUrl(path);
             }
+        }
+        
+        // Skip if we've already moved on to something else
+        if (!m_PreloadingNextClip || m_PreloadingDreamUUID != dream->uuid) {
+           g_Log->Info("Preloading aborted, user likely pressed next again");
+            //m_nextIsRunning = false;
+            if (g_Client()) g_Client()->NotifyNextCommandCompleted();
+            return;
         }
         
         // Create clip on background thread
@@ -1488,13 +1506,7 @@ void CPlayer::SkipToNext()
         // Switch to main thread for player state updates
         writer_lock l(m_UpdateMutex);
         
-        // Skip if we've already moved on to something else
-        if (!m_PreloadingNextClip || m_PreloadingDreamUUID != dream->uuid) {
-           g_Log->Info("Preloading aborted, user likely pressed next again");
-            //m_nextIsRunning = false;
-            if (g_Client()) g_Client()->NotifyNextCommandCompleted();
-            return;
-         }
+
         g_Log->Info("Async preloading complete, starting transition now");
 
         // Now start the transition (this was previously at the beginning)
