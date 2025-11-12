@@ -1377,8 +1377,8 @@ void CPlayer::SkipToNext()
         m_PreloadingDreamUUID = nextDecision->dream->uuid;
         
         // Start a buffering pause immediately (don't wait for clip to be created)
-        SetPausedForBuffering(true);
-        SetPaused(true);
+        //SetPausedForBuffering(true);
+        //SetPaused(true);
         
         // Create the clip asynchronously to avoid blocking
         std::thread([this, nextDecision, currentProgress]() {
