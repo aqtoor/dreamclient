@@ -46,6 +46,8 @@ class CPlayer : public Base::CSingleton<CPlayer>
     
     bool m_offlineMode;
     
+    bool m_nextIsRunning = false;
+    
     std::atomic<bool> m_shutdownFlag{false};
     std::shared_ptr<std::thread> m_startupThread;
     

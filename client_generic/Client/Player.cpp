@@ -5,6 +5,8 @@
 #include <boost/thread/xtime.hpp>
 #include <boost/date_time/posix_time/posix_time.hpp>
 
+#include "client.h"
+
 #ifdef WIN32
 #include <windows.h>
 #endif
@@ -62,7 +64,6 @@
 #endif
 
 class CElectricSheep* gClientInstance = nullptr;
-
 static void
 PrintQueue(std::string_view _str,
            const Base::CBlockingQueue<std::string>& _history,
@@ -94,7 +95,7 @@ void destroyClipAsync(ContentDecoder::spCClip clip) {
 // MARK: - Setup & lifecycle
 CPlayer::CPlayer() : m_isFirstPlay(true), m_offlineMode(false)
 {
-    m_DecoderFps = 23; //	http://en.wikipedia.org/wiki/23_(numerology)
+    m_DecoderFps = 23; //    http://en.wikipedia.org/wiki/23_(numerology)
     m_PerceptualFPS = 20;
     m_DisplayFps = 60;
     m_bFullscreen = true;
@@ -230,7 +231,7 @@ int CPlayer::AddDisplay([[maybe_unused]] uint32_t screen,
 
 #endif //! WIN32
 
-    //	Start renderer & set window title.
+    //    Start renderer & set window title.
     if (spRenderer->Initialize(spDisplay) == false)
         return -1;
     spDisplay->Title("infinidream");
@@ -264,7 +265,7 @@ bool CPlayer::Startup()
         m_DisplayFps = 0.0;
     }
 #endif
-    //	Grab some paths for the decoder.
+    //    Grab some paths for the decoder.
     std::string content = g_Settings()->Root() + "content/";
 #ifndef LINUX_GNU
     std::string scriptRoot =
@@ -290,7 +291,7 @@ bool CPlayer::Startup()
 
     m_NextClipInfoQueue.setMaxQueueElements(10);
 
-    //	Create decoder last.
+    //    Create decoder last.
     g_Log->Info("Starting decoder...");
 
     m_bStarted = false;
@@ -463,7 +464,7 @@ bool CPlayer::Shutdown(void)
     m_displayUnits.clear();
 
     m_bStarted = false;
-    m_shutdownFlag = true;  
+    m_shutdownFlag = true;
 
     return true;
 }
@@ -471,7 +472,7 @@ bool CPlayer::Shutdown(void)
 CPlayer::~CPlayer()
 {
     m_playlistManager = nullptr;
-    //	Mark singleton as properly shutdown, to track unwanted access after this
+    //    Mark singleton as properly shutdown, to track unwanted access after this
     // point.
     SingletonActive(false);
 }
@@ -563,7 +564,7 @@ bool CPlayer::EndDisplayFrame(uint32_t displayUnit, bool drawn)
     return du->spRenderer->EndFrame(drawn);
 }
 
-//	Chill the remaining time to keep the framerate.
+//    Chill the remaining time to keep the framerate.
 void CPlayer::FpsCap(const double _cap)
 {
     double diff = 1.0 / _cap - (m_Timer.Time() - m_CapClock);
@@ -964,7 +965,7 @@ void CPlayer::PlayDreamNow(std::string_view _uuid, int64_t frameNumber) {
     m_nextDreamDecision = std::nullopt;
     
     Cache::CacheManager& cm = Cache::CacheManager::getInstance();
-    // NOTE : This is the only path that currently streams 
+    // NOTE : This is the only path that currently streams
     if (cm.hasDream(std::string(_uuid))) {
         auto dream = cm.getDream(std::string(_uuid));
 
@@ -1307,11 +1308,21 @@ void CPlayer::SkipToNext()
 {
     g_Log->Info("Next");
     
+    //check if we are already running a Next operation
+//    if (m_nextIsRunning) {
+//        g_Log->Info("Next operation already in progress, ignoring additional request");
+//        return;
+//    } else {
+//        m_nextIsRunning = true;
+//    }
+
     // Get the next dream decision
     // User-initiated skip - allow streaming
     auto nextDecision = m_playlistManager->preflightNextDream(true);
     if (!nextDecision) {
         g_Log->Error("No next dream available");
+        //m_nextIsRunning = false;
+        if (g_Client()) g_Client()->NotifyNextCommandCompleted();
         return;
     }
     
@@ -1356,8 +1367,10 @@ void CPlayer::SkipToNext()
                     m_nextClip->m_Alpha = static_cast<float>(currentProgress);
                 }
             }
-            return;
-        }
+            //m_nextIsRunning = false;
+            if (g_Client()) g_Client()->NotifyNextCommandCompleted();
+             return;
+         }
         
         // We are not cached, this will trigger a pause
         m_PreloadingNextClip = true;
@@ -1384,8 +1397,10 @@ void CPlayer::SkipToNext()
             // Skip if we've already moved on to something else
             if (!m_PreloadingNextClip || m_PreloadingDreamUUID != dream->uuid) {
                g_Log->Info("Preloading aborted, user likely pressed next again");
-               return;
-            }
+                //m_nextIsRunning = false;
+                if (g_Client()) g_Client()->NotifyNextCommandCompleted();
+                return;
+             }
             
             // Now create the clip on a background thread
             auto du = m_displayUnits[0];
@@ -1412,10 +1427,11 @@ void CPlayer::SkipToNext()
             if (currentProgress > 0.1) {
                 m_nextClip->m_Alpha = static_cast<float>(currentProgress);
             }
-            
+            if (g_Client()) g_Client()->NotifyNextCommandCompleted();
             g_Log->Info("Async preloading complete for manually triggered transition");
         }).detach();
-  
+        //m_nextIsRunning = false;
+        
         return;
     }
     
@@ -1442,6 +1458,8 @@ void CPlayer::SkipToNext()
         if (m_nextClip) {
             m_nextClip->SetTransitionLength(1.0f, 5.0f);
         }
+        //m_nextIsRunning = false;
+        if (g_Client()) g_Client()->NotifyNextCommandCompleted();
         return;
     }
     
@@ -1468,7 +1486,9 @@ void CPlayer::SkipToNext()
         // Skip if we've already moved on to something else
         if (!m_PreloadingNextClip || m_PreloadingDreamUUID != dream->uuid) {
            g_Log->Info("Preloading aborted, user likely pressed next again");
-           return;
+            //m_nextIsRunning = false;
+            if (g_Client()) g_Client()->NotifyNextCommandCompleted();
+            return;
         }
         
         // Create clip on background thread
@@ -1510,7 +1530,10 @@ void CPlayer::SkipToNext()
         // Clear preloading state
         m_PreloadingNextClip = false;
         m_PreloadingDreamUUID = "";
+        if (g_Client()) g_Client()->NotifyNextCommandCompleted();
     }).detach();
+    //m_nextIsRunning = false;
+    
 }
 
 void CPlayer::ReturnToPrevious()
